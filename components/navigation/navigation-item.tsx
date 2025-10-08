@@ -43,11 +43,11 @@ export const NavigationItem = ({ id, imageUrl, name }: navigationItemProps) => {
             <Image
               src={imageUrl} alt={t("navigation.server_image_alt")}
               width={512} height={512}
-              className="object-cover rounded-[1rem]"
+              className="object-cover rounded-2xl"
             />
           ) : (
             <DiscordIcon
-              className="text-red-500 object-cover rounded-[1rem]"
+              className="text-red-500 object-cover rounded-2xl"
             />
           )}
         </div>

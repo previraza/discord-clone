@@ -154,7 +154,7 @@ export const CreateChannelModal = () => {
                         disabled={isLoading}
                       >
                         <FormControl>
-                          <SelectTrigger className="bg-zinc-300/50 border-0 focus:ring-0 text-black ring-offset-0 capitalize focus:ring-offset-0 outline-none">
+                          <SelectTrigger className="bg-zinc-300/50 border-0 focus:ring-0 text-black ring-offset-0 capitalize focus:ring-offset-0 outline-hidden">
                             <SelectValue
                               placeholder={t(
                                 "modal.create_channel.channel_type_placeholder"

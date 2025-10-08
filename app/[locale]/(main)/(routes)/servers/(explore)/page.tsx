@@ -7,12 +7,12 @@ import { CardGrid } from "./components/card-grid";
 export default async function ServersExplorePage(props: PageProps<"/[locale]/servers">) {
     return (
         <>
-            <div className="relative  h-[13rem] sm:h-[16rem]  md:h-[19rem] rounded-[0.3rem] z-10">
+            <div className="relative  h-52 sm:h-64  md:h-76 rounded-[0.3rem] z-10">
                 <div className="absolute  flex   w-full ">
                     <Image
                         alt="explore-hero"
                         src={exploreHero}
-                        className="object-cover w-full rounded-[0.3rem] h-[13rem]  md:h-[19rem] sm:h-[16rem]  "
+                        className="object-cover w-full rounded-[0.3rem] h-52  md:h-76 sm:h-64  "
                     />
                 </div>
 
@@ -29,7 +29,7 @@ export default async function ServersExplorePage(props: PageProps<"/[locale]/ser
                         <SearchInput
                             type="search"
                             placeholder="Explore servers"
-                            className="bg-sky-100 rounded-[0.3rem] pl-3 placeholder:text-[14px]  md:placeholder:text-[16px] placeholder:text-gray-500 outline-0 py-2 md:py-3 max-w-full w-[25rem] md:w-[35rem] text-black"
+                            className="bg-sky-100 rounded-[0.3rem] pl-3 placeholder:text-[14px]  md:placeholder:text-[16px] placeholder:text-gray-500 outline-0 py-2 md:py-3 max-w-full w-100 md:w-140 text-black"
                         />
                         <SearchIcon className="absolute   text-black right-2" />
                     </div>
