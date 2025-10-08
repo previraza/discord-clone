@@ -4,13 +4,11 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-const ServerIdLayout = async ({
+export default async function ServerIdLayout ({
   children,
   params,
-}: {
-  children: React.ReactNode;
-  params: { serverId: string };
-}) => {
+}: LayoutProps<"/[locale]/servers/[serverId]">) {
+  const { serverId } = await params;
   const profile = await currentProfile();
   if (!profile) {
     const authInstance = await auth();
@@ -19,7 +17,7 @@ const ServerIdLayout = async ({
 
   const server = await db.server.findUnique({
     where: {
-      id: params.serverId,
+      id: serverId,
     },
     include: {
       members: {
@@ -37,11 +35,9 @@ const ServerIdLayout = async ({
   return (
     <div className="h-full">
       <div className="sidebar md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
-        <ServerSidebar serverId={params.serverId} />
+        <ServerSidebar serverId={serverId} />
       </div>
       <main className="h-full md:pl-60">{children}</main>
     </div>
   );
 };
-
-export default ServerIdLayout;

@@ -35,16 +35,19 @@ import { MemberRole } from "@prisma/client";
 import qs from "query-string";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useI18n, useScopedI18n } from "@/i18n/client";
 
 const roleIconMap = {
   GUEST: null,
-  MODERATOR: <ShieldCheck className="h-4 w-4 text-black-500 ml-2" />,
+  MODERATOR: <ShieldCheck className="h-4 w-4 text-indigo-500 ml-2" />,
   ADMIN: <ShieldCheck className="h-4 w-4 text-green-500 ml-2" />,
 };
 
 export const MembersModal = () => {
   const router = useRouter();
   const { onOpen, isOpen, onClose, type, data } = useModal();
+  const t = useI18n();
+  const ts = useScopedI18n("modal.members");
   const [loadingId, setLoadingId] = useState("");
   const isModalOpen = isOpen && type === "members";
   const { server } = data as { server: ServerWithMembersWithProfiles };
@@ -89,10 +92,10 @@ export const MembersModal = () => {
         <DialogContent className="bg-white text-black overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              Manage Members
+              {ts("title")}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              {server?.members?.length} Members
+              {ts("member_count", { count: server?.members?.length })}
             </DialogDescription>
           </DialogHeader>
           <ScrollArea className="mt-8 max-h-[420px] pr-6">
@@ -121,7 +124,7 @@ export const MembersModal = () => {
                           <DropdownMenuSub>
                             <DropdownMenuSubTrigger className="flex items-center">
                               <ShieldQuestion className="w-4 h-4 mr-2" />
-                              <span>Role</span>
+                              <span>{ts("role")}</span>
                             </DropdownMenuSubTrigger>
                             <DropdownMenuPortal>
                               <DropdownMenuSubContent>
@@ -131,7 +134,7 @@ export const MembersModal = () => {
                                   }
                                 >
                                   <Shield className="h-4 w-4 mr-2" />
-                                  Guest
+                                  {ts("role.guest")}
                                   {member.role === "GUEST" && (
                                     <Check className="h-4 w-4 ml-auto" />
                                   )}
@@ -142,7 +145,7 @@ export const MembersModal = () => {
                                   }
                                 >
                                   <ShieldCheck className="h-4 w-4 mr-2" />
-                                  Moderator
+                                  {ts("role.moderator")}
                                   {member.role === "MODERATOR" && (
                                     <Check className="h-4 w-4 ml-auto" />
                                   )}
@@ -153,7 +156,7 @@ export const MembersModal = () => {
                           <DropdownMenuSeparator></DropdownMenuSeparator>
                           <DropdownMenuItem onClick={() => onKick(member.id)}>
                             <Gavel className="h-4 w-4 mr-2" />
-                            Kick from server
+                            {ts("kick")}
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

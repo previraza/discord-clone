@@ -27,19 +27,22 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
-
-const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Server name is required",
-  }),
-  imageUrl: z.string().min(1, {
-    message: "Image is required",
-  }),
-});
+import { useI18n } from "@/i18n/client";
 
 export const InitialModal = () => {
+  const t = useI18n();
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
+
+  const formSchema = z.object({
+    name: z.string().min(1, {
+      message: t("modal.initial.error.name_required"),
+    }),
+    imageUrl: z.string().min(1, {
+      message: t("modal.initial.error.image_required"),
+    }),
+  });
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
@@ -74,11 +77,10 @@ export const InitialModal = () => {
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              Create a server
+              {t("modal.initial.title")}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              Give a unique and descriptive name to your server along with an
-              image for the server icon. You can always change it later!
+              {t("modal.initial.description")}
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -108,18 +110,20 @@ export const InitialModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                        Server name
+                        {t("modal.initial.server_name_label")}
                       </FormLabel>
                       <FormControl>
                         <Input
                           disabled={isLoading}
                           className="border-0 bg-zinc-300/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                          placeholder="Enter a server name"
+                          placeholder={t(
+                            "modal.initial.server_name_placeholder"
+                          )}
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        This is the name of your server
+                        {t("modal.initial.server_name_description")}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -128,7 +132,7 @@ export const InitialModal = () => {
               </div>
               <DialogFooter className="bg-gray-100 px-6 py-4">
                 <Button variant="primary" disabled={isLoading}>
-                  Create
+                  {t("modal.initial.button.create")}
                 </Button>
               </DialogFooter>
             </form>

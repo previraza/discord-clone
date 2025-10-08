@@ -1,0 +1,160 @@
+export default {
+  "modal.create_server.title": "Create a Kyaghanda",
+  "modal.create_server.description": "Give a unique and descriptive name to your Kyaghanda along with an image for the server icon. You can always change it later!",
+  "modal.create_server.server_name_label": "Kyaghanda name",
+  "modal.create_server.server_name_placeholder": "Enter a Kyaghanda name",
+  "modal.create_server.server_name_description": "This is the name of your Kyaghanda",
+  "modal.create_server.button.create": "Create",
+  "modal.create_server.success_message": "Kyaghanda created successfully!",
+  "modal.create_server.error.name_required": "Server name is required",
+  "modal.create_server.error.image_required": "Image is required",
+
+  "modal.invite.title": "Invite your friends!",
+  "modal.invite.description": "Share this link with your friends and colleagues and invite them to join your server.",
+  "modal.invite.link_label": "Server Invite Link",
+  "modal.invite.button.new_link": "Generate a new link",
+
+  "modal.create_channel.title": "Create channel",
+  "modal.create_channel.description": "Create a text, audio or video channel",
+  "modal.create_channel.channel_name_label": "Channel name",
+  "modal.create_channel.channel_name_placeholder": "Enter a channel name",
+  "modal.create_channel.channel_name_description": "This is the name of your channel",
+  "modal.create_channel.channel_type_label": "Channel type",
+  "modal.create_channel.channel_type_placeholder": "Select a channel type",
+  "modal.create_channel.channel_type_description": "This is the type of your channel",
+  "modal.create_channel.button.create": "Create",
+  "modal.create_channel.success_message": "Channel created successfully!",
+  "modal.create_channel.error.name_required": "Channel name is required",
+  "modal.create_channel.error.name_general": "Channel name can not be 'general'",
+
+  "modal.delete_channel.title": "Delete Channel?",
+  "modal.delete_channel.confirm_delete": "Are you sure you want to delete",
+  "modal.delete_channel.warning": "This action cannot be undone.",
+  "modal.delete_channel.button.cancel": "No, take me back",
+  "modal.delete_channel.button.confirm": "Yes, I confirm",
+  "modal.delete_channel.success_message": "Channel deleted successfully!",
+
+  "modal.delete_message.title": "Delete Message?",
+  "modal.delete_message.description": "Are you sure you want to delete this message?",
+  "modal.delete_message.warning": "This action cannot be undone.",
+  "modal.delete_message.button.cancel": "No, take me back",
+  "modal.delete_message.button.confirm": "Yes, I confirm",
+  "modal.delete_message.success_message": "Message deleted successfully!",
+
+  "modal.delete_server.title": "Delete Server?",
+  "modal.delete_server.confirm_delete": "Are you sure you want to delete",
+  "modal.delete_server.warning": "This action cannot be undone.",
+  "modal.delete_server.button.cancel": "No, take me back",
+  "modal.delete_server.button.confirm": "Yes, I confirm",
+  "modal.delete_server.success_message": "Server deleted successfully!",
+
+  "modal.initial.title": "Create a server",
+  "modal.initial.description": "Give a unique and descriptive name to your server along with an image for the server icon. You can always change it later!",
+  "modal.initial.server_name_label": "Server name",
+  "modal.initial.server_name_placeholder": "Enter a server name",
+  "modal.initial.server_name_description": "This is the name of your server",
+  "modal.initial.button.create": "Create",
+  "modal.initial.error.name_required": "Server name is required",
+  "modal.initial.error.image_required": "Image is required",
+
+  "layout.title": "Discord Clone",
+  "layout.description": "Discord Clone written in TypeScript with Next.js 15",
+
+  "modal.edit_channel.title": "Edit channel",
+  "modal.edit_channel.description": "Edit your channel name and type",
+  "modal.edit_channel.button.save": "Save",
+  "modal.edit_channel.success_message": "Channel edited successfully!",
+
+  "modal.edit_server.title": "Edit your server",
+  "modal.edit_server.description": "Edit your server name and image",
+  "modal.edit_server.button.save": "Save",
+  "modal.edit_server.success_message": "Server edited successfully!",
+
+  "modal.leave_server.title": "Leave Server?",
+  "modal.leave_server.description": "Are you sure you want to leave",
+  "modal.leave_server.description2": ", you can always ask for an invite link to join back.",
+  "modal.leave_server.button.cancel": "No, take me back",
+  "modal.leave_server.button.confirm": "Yes, I confirm",
+  "modal.leave_server.success_message": "You have left the server",
+
+  "navigation.add_server": "Add a server",
+  "navigation.server_image_alt": "Server image",
+
+  "theme.toggle": "Toggle theme",
+  "theme.light": "Light",
+  "theme.dark": "Dark",
+  "theme.system": "System",
+
+  "server.sidebar.text_channels": "Text Channels",
+  "server.sidebar.voice_channels": "Voice Channels",
+  "server.sidebar.video_channels": "Video Channels",
+  "server.sidebar.members": "Members",
+
+  "server.header.invite": "Invite People",
+  "server.header.edit_server": "Edit Server",
+  "server.header.manage_members": "Manage Members",
+  "server.header.create_channel": "Create Channel",
+  "server.header.delete_server": "Delete Server",
+  "server.header.leave_server": "Leave Server",
+
+  "server.search.search": "Search",
+  "server.search.title": "Search Channels and Members",
+  "server.search.placeholder": "Search all channels and members",
+  "server.search.no_results": "No results found",
+
+  "modal.members.title": "Manage Members",
+  "modal.members.member_count": "{count} Members",
+  "modal.members.role": "Role",
+  "modal.members.role.guest": "Guest",
+  "modal.members.role.moderator": "Moderator",
+  "modal.members.kick": "Kick from server",
+
+  "popup.close": "Close",
+
+  "loading.redirect.text": "Loading...",
+
+  "media_room.loading": "Loading...",
+
+  "modal.message_file.title": "Add an attachment",
+  "modal.message_file.description": "Send a file as a message",
+  "modal.message_file.button.attach": "Attach",
+  "modal.message_file.error.attachment_required": "Attachment is required",
+
+  "chat.welcome.channel.title": "Welcome to #{name}",
+  "chat.welcome.conversation.title": "{name}",
+  "chat.welcome.channel.description": "This is the start of the #{name} channel.",
+  "chat.welcome.conversation.description": "This is the start of your conversation with {name}.",
+
+  "chat.messages.loading": "Loading messages...",
+  "chat.messages.error": "Something went wrong!",
+  "chat.messages.load_more": "Load previous messages",
+
+  "chat.item.image_alt": "content",
+  "chat.item.pdf_file": "PDF file",
+  "chat.item.edited": "(edited)",
+  "chat.item.edit_placeholder": "Edited message",
+  "chat.item.save_button": "Save",
+  "chat.item.edit_instruction": "Press escape to cancel, enter to save",
+  "chat.item.edit_tooltip": "Edit",
+  "chat.item.delete_tooltip": "Delete",
+
+  "chat.input.placeholder.conversation": "Message {name}",
+  "chat.input.placeholder.channel": "Message #{name}",
+
+  "socket.indicator.loading": "Loading...",
+  "socket.indicator.live": "Live: Real-time updates",
+
+  "chat.video_button.start": "Start Video Call",
+  "chat.video_button.end": "End Video Call",
+} as const;
+
+export const setting = {
+  code: "en",
+  name: "English",
+  native: "English",
+  direction: "ltr",
+  locale: "en-US",
+  flag: "🇬🇧",
+  icon: "/assets/flags/en.svg",
+  logo: "/assets/lang/en_logo.png",
+}

@@ -2,8 +2,10 @@
 import { useSocket } from "@/components/providers/socket-provider";
 import { Badge } from "@/components/ui/badge";
 import { useState, useEffect } from "react";
+import { useI18n } from "@/i18n/client";
 
 export const SocketIndicator = () => {
+  const t = useI18n();
   const { isConnected } = useSocket();
   const [isLargeScreen, setIsLargeScreen] = useState(false);
   const checkScreenWidth = () => {
@@ -24,7 +26,7 @@ export const SocketIndicator = () => {
             variant="outline"
             className="bg-yellow-600 text-white border-none"
           >
-            Loading...
+            {t("socket.indicator.loading")}
           </Badge>
         ) : (
           <Badge
@@ -43,7 +45,7 @@ export const SocketIndicator = () => {
           variant="outline"
           className="bg-emerald-600 text-white border-none"
         >
-          Live: Real-time updates
+          {t("socket.indicator.live")}
         </Badge>
       ) : (
         <Badge

@@ -1,0 +1,160 @@
+export default {
+  "modal.create_server.title": "Créer un Kyaghanda",
+  "modal.create_server.description": "Donne un nom unique et descriptif à ton Kyaghanda, ainsi qu'une image pour son icône. Tu pourras toujours le modifier plus tard !",
+  "modal.create_server.server_name_label": "Nom du Kyaghanda",
+  "modal.create_server.server_name_placeholder": "Entre un nom pour le Kyaghanda",
+  "modal.create_server.server_name_description": "Ceci est le nom de ton Kyaghanda",
+  "modal.create_server.button.create": "Créer",
+  "modal.create_server.success_message": "Kyaghanda créé avec succès !",
+  "modal.create_server.error.name_required": "Le nom du Kyaghanda est requis",
+  "modal.create_server.error.image_required": "L'image est requise",
+
+  "modal.invite.title": "Invite tes amis !",
+  "modal.invite.description": "Partage ce lien avec tes amis et collègues pour les inviter à rejoindre ton Kyaghanda.",
+  "modal.invite.link_label": "Lien d'invitation du Kyaghanda",
+  "modal.invite.button.new_link": "Générer un nouveau lien",
+
+  "modal.create_channel.title": "Créer un canal",
+  "modal.create_channel.description": "Crée un canal texte, audio ou vidéo",
+  "modal.create_channel.channel_name_label": "Nom du canal",
+  "modal.create_channel.channel_name_placeholder": "Entre un nom de canal",
+  "modal.create_channel.channel_name_description": "Ceci est le nom de ton canal",
+  "modal.create_channel.channel_type_label": "Type de canal",
+  "modal.create_channel.channel_type_placeholder": "Sélectionne un type de canal",
+  "modal.create_channel.channel_type_description": "Ceci est le type de ton canal",
+  "modal.create_channel.button.create": "Créer",
+  "modal.create_channel.success_message": "Canal créé avec succès !",
+  "modal.create_channel.error.name_required": "Le nom du canal est requis",
+  "modal.create_channel.error.name_general": "Le nom du canal ne peut pas être 'general'",
+
+  "modal.delete_channel.title": "Supprimer le canal ?",
+  "modal.delete_channel.confirm_delete": "Es-tu sûr de vouloir supprimer",
+  "modal.delete_channel.warning": "Cette action est irréversible.",
+  "modal.delete_channel.button.cancel": "Non, revenir en arrière",
+  "modal.delete_channel.button.confirm": "Oui, je confirme",
+  "modal.delete_channel.success_message": "Canal supprimé avec succès !",
+
+  "modal.delete_message.title": "Supprimer le message ?",
+  "modal.delete_message.description": "Es-tu sûr de vouloir supprimer ce message ?",
+  "modal.delete_message.warning": "Cette action est irréversible.",
+  "modal.delete_message.button.cancel": "Non, revenir en arrière",
+  "modal.delete_message.button.confirm": "Oui, je confirme",
+  "modal.delete_message.success_message": "Message supprimé avec succès !",
+
+  "modal.delete_server.title": "Supprimer le Kyaghanda ?",
+  "modal.delete_server.confirm_delete": "Es-tu sûr de vouloir supprimer",
+  "modal.delete_server.warning": "Cette action est irréversible.",
+  "modal.delete_server.button.cancel": "Non, revenir en arrière",
+  "modal.delete_server.button.confirm": "Oui, je confirme",
+  "modal.delete_server.success_message": "Kyaghanda supprimé avec succès !",
+
+  "modal.initial.title": "Créer un Kyaghanda",
+  "modal.initial.description": "Donne un nom unique et descriptif à ton Kyaghanda, ainsi qu'une image pour son icône. Tu pourras toujours le modifier plus tard !",
+  "modal.initial.server_name_label": "Nom du Kyaghanda",
+  "modal.initial.server_name_placeholder": "Entre un nom pour le Kyaghanda",
+  "modal.initial.server_name_description": "Ceci est le nom de ton Kyaghanda",
+  "modal.initial.button.create": "Créer",
+  "modal.initial.error.name_required": "Le nom du Kyaghanda est requis",
+  "modal.initial.error.image_required": "L'image est requise",
+
+  "layout.title": "Clone de Discord",
+  "layout.description": "Clone de Discord écrit en TypeScript avec Next.js 15",
+
+  "modal.edit_channel.title": "Modifier le canal",
+  "modal.edit_channel.description": "Modifie le nom et le type de ton canal",
+  "modal.edit_channel.button.save": "Enregistrer",
+  "modal.edit_channel.success_message": "Canal modifié avec succès !",
+
+  "modal.edit_server.title": "Modifier ton Kyaghanda",
+  "modal.edit_server.description": "Modifie le nom et l'image de ton Kyaghanda",
+  "modal.edit_server.button.save": "Enregistrer",
+  "modal.edit_server.success_message": "Kyaghanda modifié avec succès !",
+
+  "modal.leave_server.title": "Quitter le Kyaghanda ?",
+  "modal.leave_server.description": "Es-tu sûr de vouloir quitter",
+  "modal.leave_server.description2": ", tu pourras toujours demander un lien d'invitation pour revenir.",
+  "modal.leave_server.button.cancel": "Non, revenir en arrière",
+  "modal.leave_server.button.confirm": "Oui, je confirme",
+  "modal.leave_server.success_message": "Tu as quitté le Kyaghanda",
+
+  "navigation.add_server": "Ajouter un Kyaghanda",
+  "navigation.server_image_alt": "Image du Kyaghanda",
+
+  "theme.toggle": "Changer de thème",
+  "theme.light": "Clair",
+  "theme.dark": "Sombre",
+  "theme.system": "Système",
+
+  "server.sidebar.text_channels": "Canaux textuels",
+  "server.sidebar.voice_channels": "Canaux vocaux",
+  "server.sidebar.video_channels": "Canaux vidéo",
+  "server.sidebar.members": "Membres",
+
+  "server.header.invite": "Inviter des personnes",
+  "server.header.edit_server": "Modifier le Kyaghanda",
+  "server.header.manage_members": "Gérer les membres",
+  "server.header.create_channel": "Créer un canal",
+  "server.header.delete_server": "Supprimer le Kyaghanda",
+  "server.header.leave_server": "Quitter le Kyaghanda",
+
+  "server.search.search": "Rechercher",
+  "server.search.title": "Rechercher des canaux et des membres",
+  "server.search.placeholder": "Rechercher parmi tous les canaux et membres",
+  "server.search.no_results": "Aucun résultat trouvé",
+
+  "modal.members.title": "Gérer les membres",
+  "modal.members.member_count": "{count} membres",
+  "modal.members.role": "Rôle",
+  "modal.members.role.guest": "Invité",
+  "modal.members.role.moderator": "Modérateur",
+  "modal.members.kick": "Exclure du Kyaghanda",
+
+  "popup.close": "Fermer",
+
+  "loading.redirect.text": "Chargement...",
+
+  "media_room.loading": "Chargement...",
+
+  "modal.message_file.title": "Ajouter une pièce jointe",
+  "modal.message_file.description": "Envoie un fichier comme message",
+  "modal.message_file.button.attach": "Joindre",
+  "modal.message_file.error.attachment_required": "Une pièce jointe est requise",
+
+  "chat.welcome.channel.title": "Bienvenue dans #{name}",
+  "chat.welcome.conversation.title": "{name}",
+  "chat.welcome.channel.description": "Ceci est le début du canal #{name}.",
+  "chat.welcome.conversation.description": "Ceci est le début de ta conversation avec {name}.",
+
+  "chat.messages.loading": "Chargement des messages...",
+  "chat.messages.error": "Une erreur est survenue !",
+  "chat.messages.load_more": "Charger les messages précédents",
+
+  "chat.item.image_alt": "contenu",
+  "chat.item.pdf_file": "Fichier PDF",
+  "chat.item.edited": "(modifié)",
+  "chat.item.edit_placeholder": "Message modifié",
+  "chat.item.save_button": "Enregistrer",
+  "chat.item.edit_instruction": "Appuie sur Échap pour annuler, Entrée pour enregistrer",
+  "chat.item.edit_tooltip": "Modifier",
+  "chat.item.delete_tooltip": "Supprimer",
+
+  "chat.input.placeholder.conversation": "Message à {name}",
+  "chat.input.placeholder.channel": "Message sur #{name}",
+
+  "socket.indicator.loading": "Chargement...",
+  "socket.indicator.live": "En direct : mises à jour en temps réel",
+
+  "chat.video_button.start": "Démarrer un appel vidéo",
+  "chat.video_button.end": "Terminer l'appel vidéo",
+} as const;
+
+export const setting = {
+  code: "fr",
+  name: "French",
+  native: "Français",
+  direction: "ltr",
+  locale: "fr-FR",
+  flag: "🇫🇷",
+  icon: "/assets/flags/fr.svg",
+  logo: "/assets/lang/fr_logo.png",
+}

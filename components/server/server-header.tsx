@@ -19,6 +19,7 @@ import {
   Users,
 } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
+import { useI18n } from "@/i18n/client";
 
 interface ServerHeaderProps {
   server: ServerWithMembersWithProfiles;
@@ -26,6 +27,7 @@ interface ServerHeaderProps {
 }
 
 export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
+  const t = useI18n();
   const { onOpen } = useModal();
   const isAdmin = role === MemberRole.ADMIN;
   const isModerator = isAdmin || role === MemberRole.MODERATOR;
@@ -44,7 +46,7 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
             onClick={() => onOpen("invite", { server })}
             className="dark:text-white text-black hover:!bg-indigo-600 hover:!text-white dark:hover:bg-indigo-500 text-sm cursor-pointer px-3 py-2"
           >
-            Invite People
+            {t("server.header.invite")}
             <UserPlus className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
@@ -53,7 +55,7 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
             className="text-sm cursor-pointer px-3 py-2"
             onClick={() => onOpen("editServer", { server })}
           >
-            Edit Server
+            {t("server.header.edit_server")}
             <Edit className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
@@ -62,7 +64,7 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
             className="text-sm cursor-pointer px-3 py-2"
             onClick={() => onOpen("members", { server })}
           >
-            Manage Members
+            {t("server.header.manage_members")}
             <Users className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
@@ -71,7 +73,7 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
             className="text-sm cursor-pointer px-3 py-2"
             onClick={() => onOpen("createChannel", { server })}
           >
-            Create Channel
+            {t("server.header.create_channel")}
             <PlusCircle className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
@@ -81,7 +83,7 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
             onClick={() => onOpen("deleteServer", { server })}
             className="text-rose-500 hover:!text-white hover:!bg-red-500 dark:hover:bg-red-700 text-sm cursor-pointer px-3 py-2"
           >
-            Delete Server
+            {t("server.header.delete_server")}
             <Trash className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}
@@ -90,7 +92,7 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
             onClick={() => onOpen("leaveServer", { server })}
             className="text-rose-500 hover:!text-white hover:!bg-red-500 dark:hover:bg-red-700 text-sm cursor-pointer px-3 py-2"
           >
-            Leave Server
+            {t("server.header.leave_server")}
             <LogOut className="h-4 w-4 ml-auto" />
           </DropdownMenuItem>
         )}

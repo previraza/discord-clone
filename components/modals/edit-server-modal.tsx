@@ -28,22 +28,24 @@ import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 import CustomPopup from "@/components/custom-popup";
-
-const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Server name is required",
-  }),
-  imageUrl: z.string().min(1, {
-    message: "Image is required",
-  }),
-});
+import { useI18n } from "@/i18n/client";
 
 export const EditServerModal = () => {
+  const t = useI18n();
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const isModalOpen = isOpen && type === "editServer";
   const { server } = data;
+
+  const formSchema = z.object({
+    name: z.string().min(1, {
+      message: t("modal.create_server.error.name_required"),
+    }),
+    imageUrl: z.string().min(1, {
+      message: t("modal.create_server.error.image_required"),
+    }),
+  });
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -87,10 +89,10 @@ export const EditServerModal = () => {
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              Edit your server
+              {t("modal.edit_server.title")}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              Edit your server name and image
+              {t("modal.edit_server.description")}
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -120,18 +122,20 @@ export const EditServerModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                        Server name
+                        {t("modal.create_server.server_name_label")}
                       </FormLabel>
                       <FormControl>
                         <Input
                           disabled={isLoading}
                           className="border-0 bg-zinc-300/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                          placeholder="Enter a server name"
+                          placeholder={t(
+                            "modal.create_server.server_name_placeholder"
+                          )}
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        This is the name of your server
+                        {t("modal.create_server.server_name_description")}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -140,7 +144,7 @@ export const EditServerModal = () => {
               </div>
               <DialogFooter className="bg-gray-100 px-6 py-4">
                 <Button variant="primary" disabled={isLoading}>
-                  Save
+                  {t("modal.edit_server.button.save")}
                 </Button>
               </DialogFooter>
             </form>
@@ -149,7 +153,7 @@ export const EditServerModal = () => {
       </Dialog>
       <CustomPopup
         isOpen={isPopupOpen}
-        message="Server edited successfully!"
+        message={t("modal.edit_server.success_message")}
         onClose={() => setIsPopupOpen(false)}
       />
     </>

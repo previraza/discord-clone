@@ -8,6 +8,7 @@ import { ChatItem } from "./chat-item";
 import { format } from "date-fns";
 import { useChatSocket } from "@/hooks/use-chat-socket";
 import { useChatScroll } from "@/hooks/use-chat-scroll";
+import { useI18n } from "@/i18n/client";
 type MessageWithMemberWithProfile = Message & {
   member: Member & {
     profile: Profile;
@@ -36,6 +37,7 @@ export const ChatMessages = ({
   paramValue,
   type,
 }: ChatMessagesProps) => {
+  const t = useI18n();
   const queryKey = `chat:${chatId}`;
   const addKey = `chat:${chatId}:messages`;
   const updateKey = `chat:${chatId}:messages:update`;
@@ -66,7 +68,7 @@ export const ChatMessages = ({
       <div className="flex flex-col flex-1 justify-center items-center">
         <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" />
         <p className="text-xs dark:text-zinc-400 text-zinc-500">
-          Loading messages...
+          {t("chat.messages.loading")}
         </p>
       </div>
     );
@@ -76,7 +78,7 @@ export const ChatMessages = ({
       <div className="flex flex-col flex-1 justify-center items-center">
         <ServerCrash className="h-7 w-7 text-zinc-500 my-4" />
         <p className="text-xs dark:text-zinc-400 text-zinc-500">
-          Something went wrong!
+          {t("chat.messages.error")}
         </p>
       </div>
     );
@@ -94,7 +96,7 @@ export const ChatMessages = ({
               onClick={() => fetchNextPage()}
               className="text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 text-xs my-4 dark:hover:text-zinc-300 transition"
             >
-              Load previous messages
+              {t("chat.messages.load_more")}
             </button>
           )}
         </div>

@@ -25,17 +25,22 @@ import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 import qs from "query-string";
-const formSchema = z.object({
-  fileUrl: z.string().min(1, {
-    message: "Attachment is required",
-  }),
-});
+import { useI18n, useScopedI18n } from "@/i18n/client";
 
 export const MessageFileModal = () => {
   const router = useRouter();
   const { isOpen, onClose, type, data } = useModal();
+  const t = useI18n();
+  const ts = useScopedI18n("modal.message_file");
   const { apiUrl, query } = data;
   const isModalOpen = isOpen && type === "messageFile";
+
+  const formSchema = z.object({
+    fileUrl: z.string().min(1, {
+      message: ts("error.attachment_required"),
+    }),
+  });
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -73,9 +78,9 @@ export const MessageFileModal = () => {
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              Add an attachment
+              {ts("title")}
             </DialogTitle>
-            <DialogDescription className="text-center text-zinc-500"></DialogDescription>
+            <DialogDescription className="text-center text-zinc-500">{ts("description")}</DialogDescription>
           </DialogHeader>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -101,7 +106,7 @@ export const MessageFileModal = () => {
               </div>
               <DialogFooter className="bg-gray-100 px-6 py-4">
                 <Button variant="primary" disabled={isLoading}>
-                  Attach
+                  {ts("button.attach")}
                 </Button>
               </DialogFooter>
             </form>

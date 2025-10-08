@@ -13,10 +13,13 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import CustomPopup from "@/components/custom-popup";
+import { useI18n, useScopedI18n } from "@/i18n/client";
 
 export const LeaveServerModal = () => {
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
+  const t = useI18n();
+  const ts = useScopedI18n("modal.leave_server");
   const isModalOpen = isOpen && type === "leaveServer";
   const { server } = data;
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -43,27 +46,27 @@ export const LeaveServerModal = () => {
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              Leave Server?
+              {ts("title")}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              Are you sure you want to leave
+              {ts("description")}{" "}
               <span className="font-semibold text-indigo-500">
                 {server?.name}
               </span>
-              ?, you can always ask for an invite link to join back.
+              {ts("description2")}
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="bg-gray-100 px-6 py-4">
             <div className="flex w-full items-center justify-between">
               <Button disabled={isLoading} onClick={onClose} variant="ghost">
-                No, take me back
+                {ts("button.cancel")}
               </Button>
               <Button
                 disabled={isLoading}
                 onClick={onClick}
                 className="hover:bg-red-500 text-black hover:text-white"
               >
-                Yes, I confirm
+                {ts("button.confirm")}
               </Button>
             </div>
           </DialogFooter>
@@ -71,7 +74,7 @@ export const LeaveServerModal = () => {
       </Dialog>
       <CustomPopup
         isOpen={isPopupOpen}
-        message="You have left the server"
+        message={ts("success_message")}
         onClose={() => setIsPopupOpen(false)}
       />
     </>

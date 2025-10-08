@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
+import { useI18n } from "@/i18n/client";
 
 interface navigationItemProps {
   id: string;
@@ -14,6 +15,7 @@ interface navigationItemProps {
 export const NavigationItem = ({ id, imageUrl, name }: navigationItemProps) => {
   const params = useParams();
   const router = useRouter();
+  const t = useI18n();
   const onClick = () => {
     if (params?.serverId !== id) {
       router.push(`/servers/${id}`);
@@ -36,7 +38,7 @@ export const NavigationItem = ({ id, imageUrl, name }: navigationItemProps) => {
               "bg-primary/10 text-primary rounded-[16px]"
           )}
         >
-          <Image fill src={imageUrl} alt="Server image" />
+          <Image fill src={imageUrl} alt={t("navigation.server_image_alt")} />
         </div>
       </button>
     </ActionTooltip>

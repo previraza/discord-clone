@@ -10,6 +10,7 @@ import axios from "axios";
 import { useModal } from "@/hooks/use-modal-store";
 import { EmojiPicker } from "@/components/emoji-picker";
 import { useRouter } from "next/navigation";
+import { useI18n } from "@/i18n/client";
 interface ChatInputProps {
   apiUrl: string;
   query: Record<string, any>;
@@ -20,6 +21,7 @@ const formSchema = z.object({
   content: z.string().min(1),
 });
 export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
+  const t = useI18n();
   const { onOpen } = useModal();
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,9 +62,11 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                     <Plus className="text-white dark:text-[#313338]" />
                   </button>
                   <Input
-                    placeholder={`Message ${
-                      type === "conversation" ? name : "#" + name
-                    }`}
+                    placeholder={
+                      type === "conversation"
+                        ? t("chat.input.placeholder.conversation", { name })
+                        : t("chat.input.placeholder.channel", { name })
+                    }
                     disabled={isLoading}
                     className="px-14 py-6 bg-zinc-200/90 dark:bg-zinc-700/75 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-600 dark:text-zinc-200"
                     {...field}

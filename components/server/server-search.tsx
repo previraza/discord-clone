@@ -12,6 +12,7 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Search } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useI18n } from "@/i18n/client";
 
 interface ServerSearchProps {
   data: {
@@ -28,6 +29,7 @@ interface ServerSearchProps {
 }
 
 export const ServerSearch = ({ data }: ServerSearchProps) => {
+  const t = useI18n();
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const params = useParams();
@@ -64,7 +66,7 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
       >
         <Search className="w-4 h-4 dark:text-zinc-400 text-zinc-500" />
         <p className="font-semibold text-sm text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition">
-          Search
+          {t("server.search.search")}
         </p>
         <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground ml-auto">
           <span className="text-xs">CTRL+S</span>
@@ -72,11 +74,11 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
       </button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <VisuallyHidden>
-          <DialogTitle>Search Channels and Members</DialogTitle>
+          <DialogTitle>{t("server.search.title")}</DialogTitle>
         </VisuallyHidden>
-        <CommandInput placeholder="Search all channels and members" />
+        <CommandInput placeholder={t("server.search.placeholder")} />
         <CommandList>
-          <CommandEmpty>No results found</CommandEmpty>
+          <CommandEmpty>{t("server.search.no_results")}</CommandEmpty>
           {data.map(({ label, data, type }) => {
             if (!data?.length) return null;
             return (

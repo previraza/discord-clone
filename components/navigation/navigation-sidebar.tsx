@@ -7,6 +7,7 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { NavigationItem } from "./navigation-item";
+import LocaleSwitcher from "@/i18n/components/locale-switcher";
 
 export const NavigationSidebar = async () => {
   const profile = await currentProfile();
@@ -39,6 +40,7 @@ export const NavigationSidebar = async () => {
         ))}
       </ScrollArea>
       <div className="flex pb-3 mt-auto items-center flex-col gap-y-4">
+        <LocaleSwitcher className="bg-transparent border-0" />
         <ModeToggle />
         <SignedOut>
           <SignInButton />

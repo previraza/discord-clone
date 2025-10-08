@@ -3,10 +3,10 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
-import { ModalProvider } from "@/components/providers/modal-provider";
 import { SocketProvider } from "@/components/providers/socket-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
 import { Poppins } from "next/font/google"; // Import Google Font
+import { getI18n } from "@/i18n/server";
 
 // Load Poppins font with specific weights
 const poppins = Poppins({
@@ -15,21 +15,29 @@ const poppins = Poppins({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "Discord Clone",
-  description: "Discord Clone written in TypeScript with Next.js 15",
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  const t = await getI18n();
+  return {
+    title: t("layout.title"),
+    description: t("layout.description"),
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+  params,
+}: LayoutProps<"/[locale]">) {
+  const { locale } = await params;
+  const t = await getI18n();
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang={locale} suppressHydrationWarning>
         <head>
-          <meta name="apple-mobile-web-app-title" content="Discord Clone" />
+          <meta name="apple-mobile-web-app-title" content={t("layout.title")} />
           <meta
             name="google-site-verification"
             content="aHfl2qQoUMINMiWMdSU3y2XatWuB3RECA5xw8tafs18"
@@ -49,7 +57,6 @@ export default function RootLayout({
             storageKey="discord-theme"
           >
             <SocketProvider>
-              <ModalProvider />
               <QueryProvider>{children}</QueryProvider>
             </SocketProvider>
           </ThemeProvider>

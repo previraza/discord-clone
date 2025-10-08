@@ -27,21 +27,23 @@ import React, { useState } from "react";
 import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
-
-const formSchema = z.object({
-  name: z.string().min(1, {
-    message: "Server name is required",
-  }),
-  imageUrl: z.string().min(1, {
-    message: "Image is required",
-  }),
-});
+import { useI18n } from "@/i18n/client";
 
 export const CreateServerModal = () => {
+  const t = useI18n();
   const { isOpen, onClose, type } = useModal();
   const router = useRouter();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const isModalOpen = isOpen && type === "createServer";
+
+  const formSchema = z.object({
+    name: z.string().min(1, {
+      message: t("modal.create_server.error.name_required"),
+    }),
+    imageUrl: z.string().min(1, {
+      message: t("modal.create_server.error.image_required"),
+    }),
+  });
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -78,11 +80,10 @@ export const CreateServerModal = () => {
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              Create a server
+              {t("modal.create_server.title")}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              Give a unique and descriptive name to your server along with an
-              image for the server icon. You can always change it later!
+              {t("modal.create_server.description")}
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -112,18 +113,20 @@ export const CreateServerModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                        Server name
+                        {t("modal.create_server.server_name_label")}
                       </FormLabel>
                       <FormControl>
                         <Input
                           disabled={isLoading}
                           className="border-0 bg-zinc-300/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                          placeholder="Enter a server name"
+                          placeholder={t(
+                            "modal.create_server.server_name_placeholder"
+                          )}
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        This is the name of your server
+                        {t("modal.create_server.server_name_description")}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -132,7 +135,7 @@ export const CreateServerModal = () => {
               </div>
               <DialogFooter className="bg-gray-100 px-6 py-4">
                 <Button variant="primary" disabled={isLoading}>
-                  Create
+                  {t("modal.create_server.button.create")}
                 </Button>
               </DialogFooter>
             </form>
@@ -141,7 +144,7 @@ export const CreateServerModal = () => {
       </Dialog>
       <CustomPopup
         isOpen={isPopupOpen}
-        message="Server created successfully!"
+        message={t("modal.create_server.success_message")}
         onClose={() => setIsPopupOpen(false)}
       />
     </>

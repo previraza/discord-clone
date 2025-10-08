@@ -14,8 +14,10 @@ import { Button } from "@/components/ui/button";
 import { Check, Copy, RefreshCw } from "lucide-react";
 import { useOrigin } from "@/hooks/use-origin";
 import axios from "axios";
+import { useI18n } from "@/i18n/client";
 
 export const InviteModal = () => {
+  const t = useI18n();
   const { onOpen, isOpen, onClose, type, data } = useModal();
   const origin = useOrigin();
   const isModalOpen = isOpen && type === "invite";
@@ -49,16 +51,15 @@ export const InviteModal = () => {
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              Invite your friends!
+              {t("modal.invite.title")}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              Share this link with your friends and colleagues and invite them
-              to join your server.
+              {t("modal.invite.description")}
             </DialogDescription>
           </DialogHeader>
           <div className="p-6">
             <Label className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-              Server Invite Link
+              {t("modal.invite.link_label")}
             </Label>
             <div className="flex items-center mt-2 gap-x-2">
               <Input
@@ -82,7 +83,7 @@ export const InviteModal = () => {
               size="sm"
               className="text-zinc-500 mt-4 text-xs"
             >
-              Generate a new link
+              {t("modal.invite.button.new_link")}
               <RefreshCw className="w-4 h-4 ml-2" />
             </Button>
           </div>

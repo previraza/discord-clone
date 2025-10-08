@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useModal } from "@/hooks/use-modal-store";
 import { useRouter, useParams } from "next/navigation";
+import { useI18n } from "@/i18n/client";
 
 interface ChatItemProps {
   id: string;
@@ -34,7 +35,7 @@ interface ChatItemProps {
 }
 const roleIconMap = {
   GUEST: null,
-  MODERATOR: <ShieldCheck className="text-black h-4 w-4 ml-2" />,
+  MODERATOR: <ShieldCheck className="text-indigo-500 h-4 w-4 ml-2" />,
   ADMIN: <ShieldCheck className="text-green-500 h-4 w-4 ml-2" />,
 };
 const formSchema = z.object({
@@ -52,6 +53,7 @@ export const ChatItem = ({
   socketUrl,
   socketQuery,
 }: ChatItemProps) => {
+  const t = useI18n();
   const [isEditing, setIsEditing] = useState(false);
   const { onOpen } = useModal();
   const router = useRouter();
@@ -132,7 +134,7 @@ export const ChatItem = ({
             >
               <Image
                 src={fileUrl}
-                alt="content"
+                alt={t("chat.item.image_alt")}
                 fill
                 className="object-cover"
               />
@@ -147,7 +149,7 @@ export const ChatItem = ({
                 rel="noopener noreferrer"
                 className="text-sm ml-2 text-indigo-500 dark:text-indigo-400 hover:underline"
               >
-                PDF file
+                {t("chat.item.pdf_file")}
               </a>
             </div>
           )}
@@ -162,7 +164,7 @@ export const ChatItem = ({
               {content}
               {isUpdated && !deleted && (
                 <span className="text-[10px] mx-2 text-zinc-500 dark:text-zinc-400">
-                  (edited)
+                  {t("chat.item.edited")}
                 </span>
               )}
             </p>
@@ -183,7 +185,7 @@ export const ChatItem = ({
                           <Input
                             disabled={isLoading}
                             className="p-2 bg-zinc-200/90 dark:bg-zinc-700/25 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-600 dark:text-zinc-200"
-                            placeholder="Edited message"
+                            placeholder={t("chat.item.edit_placeholder")}
                             {...field}
                           />
                         </div>
@@ -192,11 +194,11 @@ export const ChatItem = ({
                   )}
                 />
                 <Button size="sm" variant="primary" disabled={isLoading}>
-                  Save
+                  {t("chat.item.save_button")}
                 </Button>
               </form>
               <span className="text-[10px] mt-1 text-zinc-400">
-                Press escape to cancel, enter to save
+                {t("chat.item.edit_instruction")}
               </span>
             </Form>
           )}
@@ -205,14 +207,14 @@ export const ChatItem = ({
       {canDeleteMessage && (
         <div className="hidden group-hover:flex items-center gap-x-2 absolute p-1 -top-2 right-5 bg-white dark:bg-zinc-800 border rounded-sm">
           {canEditMessage && (
-            <ActionTooltip label="Edit">
+            <ActionTooltip label={t("chat.item.edit_tooltip")}>
               <Edit
                 onClick={() => setIsEditing(true)}
                 className="cursor-pointer ml-auto w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
               />
             </ActionTooltip>
           )}
-          <ActionTooltip label="Delete">
+          <ActionTooltip label={t("chat.item.delete_tooltip")}>
             <Trash
               onClick={() =>
                 onOpen("deleteMessage", {

@@ -35,26 +35,29 @@ import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
 import { ChannelType } from "@prisma/client";
-
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(1, {
-      message: "Channel name is required",
-    })
-    .refine((name) => name !== "general", {
-      message: "Channel name can not be 'general'",
-    }),
-  type: z.nativeEnum(ChannelType),
-});
+import { useI18n } from "@/i18n/client";
 
 export const EditChannelModal = () => {
+  const t = useI18n();
   const { isOpen, onClose, type, data } = useModal();
   const params = useParams();
   const router = useRouter();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const isModalOpen = isOpen && type === "editChannel";
   const { channel } = data;
+
+  const formSchema = z.object({
+    name: z
+      .string()
+      .min(1, {
+        message: t("modal.create_channel.error.name_required"),
+      })
+      .refine((name) => name !== "general", {
+        message: t("modal.create_channel.error.name_general"),
+      }),
+    type: z.nativeEnum(ChannelType),
+  });
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -102,10 +105,10 @@ export const EditChannelModal = () => {
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              Edit channel
+              {t("modal.edit_channel.title")}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              Edit your channel name and type
+              {t("modal.edit_channel.description")}
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -117,18 +120,20 @@ export const EditChannelModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                        Channel name
+                        {t("modal.create_channel.channel_name_label")}
                       </FormLabel>
                       <FormControl>
                         <Input
                           disabled={isLoading}
                           className="border-0 bg-zinc-300/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
-                          placeholder="Enter a channel name"
+                          placeholder={t(
+                            "modal.create_channel.channel_name_placeholder"
+                          )}
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        This is the name of your channel
+                        {t("modal.create_channel.channel_name_description")}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -140,7 +145,7 @@ export const EditChannelModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                        Channel type
+                        {t("modal.create_channel.channel_type_label")}
                       </FormLabel>
                       <Select
                         defaultValue={field.value}
@@ -149,7 +154,11 @@ export const EditChannelModal = () => {
                       >
                         <FormControl>
                           <SelectTrigger className="bg-zinc-300/50 border-0 focus:ring-0 text-black ring-offset-0 capitalize focus:ring-offset-0 outline-none">
-                            <SelectValue placeholder="Select a channel type" />
+                            <SelectValue
+                              placeholder={t(
+                                "modal.create_channel.channel_type_placeholder"
+                              )}
+                            />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -165,7 +174,7 @@ export const EditChannelModal = () => {
                         </SelectContent>
                       </Select>
                       <FormDescription>
-                        This is the type of your channel
+                        {t("modal.create_channel.channel_type_description")}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -174,7 +183,7 @@ export const EditChannelModal = () => {
               </div>
               <DialogFooter className="bg-gray-100 px-6 py-4">
                 <Button variant="primary" disabled={isLoading}>
-                  Save
+                  {t("modal.edit_channel.button.save")}
                 </Button>
               </DialogFooter>
             </form>
@@ -183,7 +192,7 @@ export const EditChannelModal = () => {
       </Dialog>
       <CustomPopup
         isOpen={isPopupOpen}
-        message="Channel edited successfully!"
+        message={t("modal.edit_channel.success_message")}
         onClose={() => setIsPopupOpen(false)}
       />
     </>

@@ -1,0 +1,11 @@
+{
+  "locale": {
+    "source": "en",
+    "targets": ["en", "fr", "sw", "es", "pt"]
+  },
+  "files": {
+    "ts": {
+      "include": ["i18n/locales/[locale].locale.ts"]
+    }
+  }
+}

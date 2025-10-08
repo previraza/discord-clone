@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useI18n } from "@/i18n/client";
 
 interface LoadingRedirectProps {
   serverId: string;
@@ -15,6 +16,7 @@ const LoadingRedirect = ({
   shouldRedirect,
 }: LoadingRedirectProps) => {
   const router = useRouter();
+  const t = useI18n();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const LoadingRedirect = ({
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-2xl shadow-lg md:p-6 p-3 w-1/2 text-center md:max-w-sm">
             <p className="md:text-lg text-base font-semibold text-black text-center">
-              Loading...
+              {t("loading.redirect.text")}
             </p>
           </div>
         </div>

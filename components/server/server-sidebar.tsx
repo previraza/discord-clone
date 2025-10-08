@@ -10,6 +10,7 @@ import { Separator } from "@/components/ui/separator";
 import { ServerSection } from "@/components/server/server-section";
 import { ServerChannel } from "@/components/server/server-channel";
 import { ServerMember } from "@/components/server/server-member";
+import { getI18n } from "@/i18n/server";
 
 interface ServerSidebarProps {
   serverId: string;
@@ -25,6 +26,7 @@ const roleIconMap = {
   [MemberRole.MODERATOR]: <ShieldCheck className="mr-2 h-4 w-4 text-black" />,
 };
 export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
+  const t = await getI18n();
   const profile = await currentProfile();
   if (!profile) {
     return redirect("/");
@@ -77,7 +79,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
           <ServerSearch
             data={[
               {
-                label: "Text Channels",
+                label: t("server.sidebar.text_channels"),
                 type: "channel",
                 data: textChannels?.map((channel) => ({
                   id: channel.id,
@@ -86,7 +88,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
                 })),
               },
               {
-                label: "Voice Channels",
+                label: t("server.sidebar.voice_channels"),
                 type: "channel",
                 data: audioChannels?.map((channel) => ({
                   id: channel.id,
@@ -95,7 +97,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
                 })),
               },
               {
-                label: "Video Channels",
+                label: t("server.sidebar.video_channels"),
                 type: "channel",
                 data: videoChannels?.map((channel) => ({
                   id: channel.id,
@@ -104,7 +106,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
                 })),
               },
               {
-                label: "Members",
+                label: t("server.sidebar.members"),
                 type: "member",
                 data: members?.map((member) => ({
                   id: member.id,
@@ -122,7 +124,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
               sectionType="channels"
               channelType={ChannelType.TEXT}
               role={role}
-              label="Text Channels"
+              label={t("server.sidebar.text_channels")}
             />
             <div className="space-y-[2px]">
               {textChannels.map((channel) => (
@@ -142,7 +144,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
               sectionType="channels"
               channelType={ChannelType.AUDIO}
               role={role}
-              label="Voice Channels"
+              label={t("server.sidebar.voice_channels")}
             />
             <div className="space-y-[2px]">
               {audioChannels.map((channel) => (
@@ -162,7 +164,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
               sectionType="channels"
               channelType={ChannelType.VIDEO}
               role={role}
-              label="Video Channels"
+              label={t("server.sidebar.video_channels")}
             />
             <div className="space-y-[2px]">
               {videoChannels.map((channel) => (
@@ -181,7 +183,7 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
             <ServerSection
               sectionType="members"
               role={role}
-              label="Members"
+              label={t("server.sidebar.members")}
               server={server}
             />
             <div className="space-y-[2px]">

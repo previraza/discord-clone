@@ -4,6 +4,7 @@ import { LiveKitRoom, VideoConference } from "@livekit/components-react";
 import "@livekit/components-styles";
 import { useUser } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
+import { useI18n } from "@/i18n/client";
 
 interface MediaRoomProps {
   chatId: string;
@@ -12,6 +13,7 @@ interface MediaRoomProps {
 }
 
 export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
+  const t = useI18n();
   const { user } = useUser();
   const [token, setToken] = useState("");
   useEffect(() => {
@@ -36,7 +38,9 @@ export const MediaRoom = ({ chatId, video, audio }: MediaRoomProps) => {
     return (
       <div className="flex flex-col flex-1 justify-center items-center">
         <Loader2 className="h-7 w-7 text-zinc-500 animate-spin my-4" />
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">Loading...</p>
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+          {t("media_room.loading")}
+        </p>
       </div>
     );
   }

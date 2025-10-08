@@ -13,8 +13,10 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import CustomPopup from "@/components/custom-popup";
+import { useI18n } from "@/i18n/client";
 
 export const DeleteServerModal = () => {
+  const t = useI18n();
   const { isOpen, onClose, type, data } = useModal();
   const router = useRouter();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -43,31 +45,31 @@ export const DeleteServerModal = () => {
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3 text-red-500">
-              Delete Server?
+              {t("modal.delete_server.title")}
             </DialogTitle>
             <DialogDescription className="text-center text-black">
-              Are you sure you want to delete{" "}
+              {t("modal.delete_server.confirm_delete")}{" "}
               <span className="font-semibold text-indigo-500">
                 {server?.name}
               </span>
               ?
               <br />
               <span className="text-red-500">
-                This action cannot be undone.
+                {t("modal.delete_server.warning")}
               </span>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="bg-gray-100 px-6 py-4">
             <div className="flex w-full items-center justify-between">
               <Button disabled={isLoading} onClick={onClose} variant="ghost">
-                No, take me back
+                {t("modal.delete_server.button.cancel")}
               </Button>
               <Button
                 disabled={isLoading}
                 onClick={onClick}
                 className="hover:bg-red-500 text-black hover:text-white"
               >
-                Yes, I confirm
+                {t("modal.delete_server.button.confirm")}
               </Button>
             </div>
           </DialogFooter>
@@ -75,7 +77,7 @@ export const DeleteServerModal = () => {
       </Dialog>
       <CustomPopup
         isOpen={isPopupOpen}
-        message="Server deleted successfully!"
+        message={t("modal.delete_server.success_message")}
         onClose={() => setIsPopupOpen(false)}
       />
     </>
