@@ -78,6 +78,7 @@ export default {
   "modal.leave_server.success_message": "You have left the server",
 
   "navigation.add_server": "Add a server",
+  "navigation.explore_servers": "Explore Servers",
   "navigation.server_image_alt": "Server image",
 
   "theme.toggle": "Toggle theme",
@@ -89,6 +90,7 @@ export default {
   "server.sidebar.voice_channels": "Voice Channels",
   "server.sidebar.video_channels": "Video Channels",
   "server.sidebar.members": "Members",
+  "server.sidebar.category_title": "Categories",
 
   "server.header.invite": "Invite People",
   "server.header.edit_server": "Edit Server",
@@ -96,6 +98,7 @@ export default {
   "server.header.create_channel": "Create Channel",
   "server.header.delete_server": "Delete Server",
   "server.header.leave_server": "Leave Server",
+  "server.header.become_member": "Become a Member",
 
   "server.search.search": "Search",
   "server.search.title": "Search Channels and Members",

@@ -5,10 +5,11 @@ import { useParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { useI18n } from "@/i18n/client";
+import { DiscordIcon } from "../icons/discord";
 
 interface navigationItemProps {
   id: string;
-  imageUrl: string;
+  imageUrl: string | null;
   name: string;
 }
 
@@ -38,7 +39,17 @@ export const NavigationItem = ({ id, imageUrl, name }: navigationItemProps) => {
               "bg-primary/10 text-primary rounded-[16px]"
           )}
         >
-          <Image fill src={imageUrl} alt={t("navigation.server_image_alt")} />
+          {imageUrl ? (
+            <Image
+              src={imageUrl} alt={t("navigation.server_image_alt")}
+              width={512} height={512}
+              className="object-cover rounded-[1rem]"
+            />
+          ) : (
+            <DiscordIcon
+              className="text-red-500 object-cover rounded-[1rem]"
+            />
+          )}
         </div>
       </button>
     </ActionTooltip>

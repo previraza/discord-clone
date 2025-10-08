@@ -78,6 +78,7 @@ export default {
   "modal.leave_server.success_message": "Umeondoka Kyaghanda",
 
   "navigation.add_server": "Ongeza Kyaghanda",
+  "navigation.explore_servers": "Chunguza Kyaghanda",
   "navigation.server_image_alt": "Picha ya Kyaghanda",
 
   "theme.toggle": "Badilisha mandhari",
@@ -89,6 +90,7 @@ export default {
   "server.sidebar.voice_channels": "Chaneli za sauti",
   "server.sidebar.video_channels": "Chaneli za video",
   "server.sidebar.members": "Wanachama",
+  "server.sidebar.category_title": "Vipimo",
 
   "server.header.invite": "Alika watu",
   "server.header.edit_server": "Hariri Kyaghanda",

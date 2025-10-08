@@ -67,13 +67,15 @@ export const ServerSidebar = async ({ serverId }: ServerSidebarProps) => {
     return redirect("/");
   }
 
-  const role = server.members.find(
+  const member = server.members.find(
     (member) => member.profileId === profile.id
-  )?.role;
+  );
+
+  const role = member?.role;
 
   return (
     <div className="flex flex-col h-full w-full text-primary dark:bg-[#2B2D31] bg-[#F2F3F5]">
-      <ServerHeader server={server} role={role} />
+      <ServerHeader server={server} role={role} isMember={!!member} />
       <ScrollArea className="flex-1 px-3">
         <div className="mt-2">
           <ServerSearch

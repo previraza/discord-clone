@@ -78,6 +78,7 @@ export default {
   "modal.leave_server.success_message": "Has salido del Kyaghanda",
 
   "navigation.add_server": "Agregar un Kyaghanda",
+  "navigation.explore_servers": "Explorar Servidores",
   "navigation.server_image_alt": "Imagen del Kyaghanda",
 
   "theme.toggle": "Cambiar tema",
@@ -89,6 +90,7 @@ export default {
   "server.sidebar.voice_channels": "Canales de voz",
   "server.sidebar.video_channels": "Canales de video",
   "server.sidebar.members": "Miembros",
+  "server.sidebar.category_title": "Categorías",
 
   "server.header.invite": "Invitar personas",
   "server.header.edit_server": "Editar Kyaghanda",

@@ -8,8 +8,8 @@ export default async function LocaleLayout({
   const { locale } = await params;
   return (
     <I18nProviderClient locale={locale}>
-        <ModalProvider />
-        {children}
+      <ModalProvider />
+      {children}
     </I18nProviderClient>
   );
 }

@@ -1,3 +1,4 @@
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import "./globals.css";
@@ -5,7 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { SocketProvider } from "@/components/providers/socket-provider";
 import { QueryProvider } from "@/components/providers/query-provider";
-import { Poppins } from "next/font/google"; // Import Google Font
+import { Poppins } from "next/font/google";
 import { getI18n } from "@/i18n/server";
 
 // Load Poppins font with specific weights
@@ -50,16 +51,18 @@ export default async function RootLayout({
             poppins.className
           )}
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            disableTransitionOnChange
-            storageKey="discord-theme"
-          >
-            <SocketProvider>
-              <QueryProvider>{children}</QueryProvider>
-            </SocketProvider>
-          </ThemeProvider>
+          <NuqsAdapter>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              disableTransitionOnChange
+              storageKey="discord-theme"
+            >
+              <SocketProvider>
+                <QueryProvider>{children}</QueryProvider>
+              </SocketProvider>
+            </ThemeProvider>
+          </NuqsAdapter>
         </body>
       </html>
     </ClerkProvider>

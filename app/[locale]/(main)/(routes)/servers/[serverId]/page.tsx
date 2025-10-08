@@ -2,17 +2,9 @@ import LoadingRedirect from "@/components/loading-redirect";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
+import { JoinServer } from "./components/join-server";
 
-type Params = Promise<{
-  serverId: string;
-}>;
-
-interface ServerIdPageProps {
-  params: Params;
-}
-
-const ServerIdPage = async ({ params }: ServerIdPageProps) => {
-  // Await params since it is now a promise
+export default async function ServerIdPage ({ params }: PageProps<"/[locale]/servers/[serverId]">) {
   const { serverId } = await params;
   const profile = await currentProfile();
   if (!profile) {
@@ -40,9 +32,16 @@ const ServerIdPage = async ({ params }: ServerIdPageProps) => {
     },
   });
   const initialChannel = server?.channels[0];
+
   if (initialChannel?.name !== "general") {
-    return null;
+    return (
+      <JoinServer
+        serverId={serverId}
+        serverName={server?.name}
+      />
+    );
   }
+
   return (
     <LoadingRedirect
       serverId={serverId}
@@ -51,5 +50,3 @@ const ServerIdPage = async ({ params }: ServerIdPageProps) => {
     />
   );
 };
-
-export default ServerIdPage;
