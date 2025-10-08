@@ -16,13 +16,13 @@ const SetupPage = async () => {
   });
 
   if (server) {
-    return redirect(`/servers/${server.id}`);
+    redirect(`/servers/${server.id}`);;
   }
 
   const serverExists = await db.server.findFirst();
 
   if (serverExists) {
-    return redirect(`/servers`);
+    redirect(`/servers`);
   }
 
   return <InitialModal />;
