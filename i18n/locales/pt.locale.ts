@@ -64,8 +64,8 @@ export default {
   'modal.initial.error.name_required': 'O nome do Kyaghanda é obrigatório',
   'modal.initial.error.image_required': 'A imagem é obrigatória',
 
-  'layout.title': 'Clone do Discord',
-  'layout.description': 'Clone do Discord escrito em TypeScript com Next.js 15',
+  'layout.title': 'Mcisme Echo',
+  'layout.description': 'Mcisme Echo escrito em TypeScript com Next.js 15',
 
   'modal.edit_channel.title': 'Editar canal',
   'modal.edit_channel.description': 'Edite o nome e o tipo do seu canal',

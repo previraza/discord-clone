@@ -65,8 +65,8 @@ export default {
   'modal.initial.error.name_required': 'Server name is required',
   'modal.initial.error.image_required': 'Image is required',
 
-  'layout.title': 'Discord Clone',
-  'layout.description': 'Discord Clone written in TypeScript with Next.js 15',
+  'layout.title': 'Mcisme Echo',
+  'layout.description': 'Mcisme Echo written in TypeScript with Next.js 15',
 
   'modal.edit_channel.title': 'Edit channel',
   'modal.edit_channel.description': 'Edit your channel name and type',

@@ -65,9 +65,8 @@ export default {
   'modal.initial.error.name_required': 'Jina la Kyaghanda linahitajika',
   'modal.initial.error.image_required': 'Picha inahitajika',
 
-  'layout.title': 'Nakala ya Discord',
-  'layout.description':
-    'Nakala ya Discord imeandikwa kwa TypeScript na Next.js 15',
+  'layout.title': 'Mcisme Echo',
+  'layout.description': 'Mcisme Echo imeandikwa kwa TypeScript na Next.js 15',
 
   'modal.edit_channel.title': 'Hariri chaneli',
   'modal.edit_channel.description': 'Badilisha jina na aina ya chaneli yako',

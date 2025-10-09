@@ -1,8 +1,8 @@
-# Discord Clone by RishabN
+# Mcisme Echo by Chirstopher Mangala Manifika
 
 A full-featured real-time chat application inspired by Discord. This clone provides messaging, audio, and video chat capabilities using [LiveKit](https://livekit.io/), with user authentication handled by [Clerk](https://clerk.dev/). Built with Next.js, Prisma, and Tailwind CSS for a responsive and modern user interface.
 
-**Live Demo**: [https://discord-clone-rn.vercel.app](https://discord-clone-rn.vercel.app)
+**Live Demo**: [Demo : chat.yiraunion.org](https://chat.yiraunion.org)
 
 ## Table of Contents
 
