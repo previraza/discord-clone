@@ -1,20 +1,20 @@
-"use client";
+'use client'
 
-import { UploadDropzone } from "@/lib/uploadthing";
-import "@uploadthing/react/styles.css";
-import { FileIcon, X } from "lucide-react";
-import Image from "next/image";
+import { UploadDropzone } from '@/lib/uploadthing'
+import '@uploadthing/react/styles.css'
+import { FileIcon, X } from 'lucide-react'
+import Image from 'next/image'
 
 interface FileUploadProps {
-  onChange: (url?: string) => void;
-  value: string;
-  endpoint: "messageFile" | "serverImage";
+  onChange: (url?: string) => void
+  value: string
+  endpoint: 'messageFile' | 'serverImage'
 }
 
 export const FileUpload = ({ endpoint, onChange, value }: FileUploadProps) => {
-  const fileType = value?.split(".").pop();
+  const fileType = value?.split('.').pop()
 
-  const isPdf = fileType === "pdf";
+  const isPdf = fileType === 'pdf'
 
   if (value && !isPdf) {
     return (
@@ -22,7 +22,7 @@ export const FileUpload = ({ endpoint, onChange, value }: FileUploadProps) => {
         <Image fill src={value} alt="Upload" className="rounded-full" />
         <button
           onClick={() => {
-            onChange("");
+            onChange('')
           }}
           className="bg-rose-500 text-white p-1 rounded-full absolute top-0 right-0 shadow-xs"
           type="button"
@@ -30,7 +30,7 @@ export const FileUpload = ({ endpoint, onChange, value }: FileUploadProps) => {
           <X className="h-4 w-4" />
         </button>
       </div>
-    );
+    )
   }
 
   if (value && isPdf) {
@@ -47,7 +47,7 @@ export const FileUpload = ({ endpoint, onChange, value }: FileUploadProps) => {
         </a>
         <button
           onClick={() => {
-            onChange("");
+            onChange('')
           }}
           className="bg-rose-500 text-white p-1 rounded-full absolute -top-2 -right-2 shadow-xs"
           type="button"
@@ -55,18 +55,18 @@ export const FileUpload = ({ endpoint, onChange, value }: FileUploadProps) => {
           <X className="h-4 w-4" />
         </button>
       </div>
-    );
+    )
   }
 
   return (
     <UploadDropzone
       endpoint={endpoint}
       onClientUploadComplete={(res) => {
-        onChange(res?.[0].url);
+        onChange(res?.[0].url)
       }}
       onUploadError={(error: Error) => {
-        console.error(error);
+        console.error(error)
       }}
     />
-  );
-};
+  )
+}

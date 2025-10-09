@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useI18n } from "@/i18n/client";
-import Spinner from "./spinner";
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { useI18n } from '@/i18n/client'
+import Spinner from './spinner'
 
 interface LoadingRedirectProps {
-  serverId: string;
-  initialChannelId: string | undefined;
-  shouldRedirect: boolean;
+  serverId: string
+  initialChannelId: string | undefined
+  shouldRedirect: boolean
 }
 
 const LoadingRedirect = ({
@@ -16,17 +16,17 @@ const LoadingRedirect = ({
   initialChannelId,
   shouldRedirect,
 }: LoadingRedirectProps) => {
-  const router = useRouter();
-  const t = useI18n();
-  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter()
+  const t = useI18n()
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     if (shouldRedirect && initialChannelId) {
-      router.push(`/servers/${serverId}/channels/${initialChannelId}`);
+      router.push(`/servers/${serverId}/channels/${initialChannelId}`)
     } else {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  }, [shouldRedirect, initialChannelId, router, serverId]);
+  }, [shouldRedirect, initialChannelId, router, serverId])
 
   return (
     <>
@@ -34,12 +34,12 @@ const LoadingRedirect = ({
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/50">
           <Spinner />
           <p className="md:text-lg text-base font-semibold text-center">
-            {t("loading.redirect.text")}
+            {t('loading.redirect.text')}
           </p>
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default LoadingRedirect;
+export default LoadingRedirect

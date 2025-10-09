@@ -1,12 +1,12 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["utfs.io"],
+    domains: ['utfs.io'],
   },
   eslint: {
     ignoreDuringBuilds: true,
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig

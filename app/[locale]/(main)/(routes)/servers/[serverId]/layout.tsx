@@ -1,18 +1,18 @@
-import { ServerSidebar } from "@/components/server/server-sidebar";
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import { auth } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation'
+import { ServerSidebar } from '@/components/server/server-sidebar'
+import { currentProfile } from '@/lib/current-profile'
+import { db } from '@/lib/db'
 
-export default async function ServerIdLayout ({
+export default async function ServerIdLayout({
   children,
   params,
-}: LayoutProps<"/[locale]/servers/[serverId]">) {
-  const { serverId } = await params;
-  const profile = await currentProfile();
+}: LayoutProps<'/[locale]/servers/[serverId]'>) {
+  const { serverId } = await params
+  const profile = await currentProfile()
   if (!profile) {
-    const authInstance = await auth();
-    return authInstance.redirectToSignIn();
+    const authInstance = await auth()
+    return authInstance.redirectToSignIn()
   }
 
   const server = await db.server.findUnique({
@@ -26,10 +26,10 @@ export default async function ServerIdLayout ({
         },
       },
     },
-  });
+  })
 
   if (!server) {
-    return redirect("/");
+    return redirect('/')
   }
 
   return (
@@ -39,5 +39,5 @@ export default async function ServerIdLayout ({
       </div>
       <main className="h-full md:pl-60">{children}</main>
     </div>
-  );
-};
+  )
+}

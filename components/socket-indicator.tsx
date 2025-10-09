@@ -1,22 +1,22 @@
-"use client";
-import { useSocket } from "@/components/providers/socket-provider";
-import { Badge } from "@/components/ui/badge";
-import { useState, useEffect } from "react";
-import { useI18n } from "@/i18n/client";
+'use client'
+import { useEffect, useState } from 'react'
+import { useSocket } from '@/components/providers/socket-provider'
+import { Badge } from '@/components/ui/badge'
+import { useI18n } from '@/i18n/client'
 
 export const SocketIndicator = () => {
-  const t = useI18n();
-  const { isConnected } = useSocket();
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const t = useI18n()
+  const { isConnected } = useSocket()
+  const [isLargeScreen, setIsLargeScreen] = useState(false)
   const checkScreenWidth = () => {
-    setIsLargeScreen(window.innerWidth >= 768);
-  };
+    setIsLargeScreen(window.innerWidth >= 768)
+  }
 
   useEffect(() => {
-    checkScreenWidth();
-    window.addEventListener("resize", checkScreenWidth);
-    return () => window.removeEventListener("resize", checkScreenWidth);
-  }, []);
+    checkScreenWidth()
+    window.addEventListener('resize', checkScreenWidth)
+    return () => window.removeEventListener('resize', checkScreenWidth)
+  }, [])
 
   if (!isConnected) {
     return (
@@ -26,7 +26,7 @@ export const SocketIndicator = () => {
             variant="outline"
             className="bg-yellow-600 text-white border-none"
           >
-            {t("socket.indicator.loading")}
+            {t('socket.indicator.loading')}
           </Badge>
         ) : (
           <Badge
@@ -35,7 +35,7 @@ export const SocketIndicator = () => {
           ></Badge>
         )}
       </>
-    );
+    )
   }
 
   return (
@@ -45,7 +45,7 @@ export const SocketIndicator = () => {
           variant="outline"
           className="bg-emerald-600 text-white border-none"
         >
-          {t("socket.indicator.live")}
+          {t('socket.indicator.live')}
         </Badge>
       ) : (
         <Badge
@@ -54,5 +54,5 @@ export const SocketIndicator = () => {
         ></Badge>
       )}
     </>
-  );
-};
+  )
+}

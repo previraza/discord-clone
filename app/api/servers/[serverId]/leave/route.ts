@@ -1,20 +1,20 @@
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server'
+import { currentProfile } from '@/lib/current-profile'
+import { db } from '@/lib/db'
 
 type Params = Promise<{
-  serverId: string;
-}>;
+  serverId: string
+}>
 
 export async function PATCH(req: Request, { params }: { params: Params }) {
   try {
-    const profile = await currentProfile();
+    const profile = await currentProfile()
     if (!profile) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse('Unauthorized', { status: 401 })
     }
-    const { serverId } = await params;
+    const { serverId } = await params
     if (!serverId) {
-      return new NextResponse("Server ID missing ", { status: 400 });
+      return new NextResponse('Server ID missing ', { status: 400 })
     }
     const server = await db.server.update({
       where: {
@@ -33,10 +33,10 @@ export async function PATCH(req: Request, { params }: { params: Params }) {
           },
         },
       },
-    });
-    return NextResponse.json(server);
+    })
+    return NextResponse.json(server)
   } catch (error) {
-    console.log("[SERVER_ID_LEAVE]", error);
-    return new NextResponse("Internal error", { status: 500 });
+    console.log('[SERVER_ID_LEAVE]', error)
+    return new NextResponse('Internal error', { status: 500 })
   }
 }

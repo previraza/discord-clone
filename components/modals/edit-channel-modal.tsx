@@ -1,78 +1,78 @@
-"use client";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+'use client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ChannelType } from '@prisma/client'
+import axios from 'axios'
+import { useParams, useRouter } from 'next/navigation'
+import qs from 'query-string'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import CustomPopup from '@/components/custom-popup'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogFooter,
+  DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import CustomPopup from "@/components/custom-popup";
-import qs from "query-string";
+} from '@/components/ui/dialog'
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormDescription,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import axios from "axios";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { useModal } from "@/hooks/use-modal-store";
-import { ChannelType } from "@prisma/client";
-import { useI18n } from "@/i18n/client";
+} from '@/components/ui/select'
+import { useModal } from '@/hooks/use-modal-store'
+import { useI18n } from '@/i18n/client'
 
 export const EditChannelModal = () => {
-  const t = useI18n();
-  const { isOpen, onClose, type, data } = useModal();
-  const params = useParams();
-  const router = useRouter();
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const isModalOpen = isOpen && type === "editChannel";
-  const { channel } = data;
+  const t = useI18n()
+  const { isOpen, onClose, type, data } = useModal()
+  const params = useParams()
+  const router = useRouter()
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const isModalOpen = isOpen && type === 'editChannel'
+  const { channel } = data
 
   const formSchema = z.object({
     name: z
       .string()
       .min(1, {
-        message: t("modal.create_channel.error.name_required"),
+        message: t('modal.create_channel.error.name_required'),
       })
-      .refine((name) => name !== "general", {
-        message: t("modal.create_channel.error.name_general"),
+      .refine((name) => name !== 'general', {
+        message: t('modal.create_channel.error.name_general'),
       }),
     type: z.nativeEnum(ChannelType),
-  });
+  })
 
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      name: '',
       type: channel?.type || ChannelType.TEXT,
     },
-  });
+  })
   useEffect(() => {
     if (channel) {
-      form.setValue("name", channel.name);
-      form.setValue("type", channel.type);
+      form.setValue('name', channel.name)
+      form.setValue('type', channel.type)
     }
-  }, [form, channel]);
+  }, [form, channel])
 
-  const isLoading = form.formState.isSubmitting;
+  const isLoading = form.formState.isSubmitting
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -81,23 +81,23 @@ export const EditChannelModal = () => {
         query: {
           serverId: params?.serverId,
         },
-      });
-      await axios.patch(url, values);
-      form.reset();
-      onClose();
-      router.refresh();
+      })
+      await axios.patch(url, values)
+      form.reset()
+      onClose()
+      router.refresh()
       setTimeout(() => {
-        setIsPopupOpen(true);
-      }, 500);
+        setIsPopupOpen(true)
+      }, 500)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const handleClose = () => {
-    form.reset();
-    onClose();
-  };
+    form.reset()
+    onClose()
+  }
 
   return (
     <>
@@ -105,10 +105,10 @@ export const EditChannelModal = () => {
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              {t("modal.edit_channel.title")}
+              {t('modal.edit_channel.title')}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              {t("modal.edit_channel.description")}
+              {t('modal.edit_channel.description')}
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -120,20 +120,20 @@ export const EditChannelModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                        {t("modal.create_channel.channel_name_label")}
+                        {t('modal.create_channel.channel_name_label')}
                       </FormLabel>
                       <FormControl>
                         <Input
                           disabled={isLoading}
                           className="border-0 bg-zinc-300/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                           placeholder={t(
-                            "modal.create_channel.channel_name_placeholder"
+                            'modal.create_channel.channel_name_placeholder',
                           )}
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        {t("modal.create_channel.channel_name_description")}
+                        {t('modal.create_channel.channel_name_description')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -145,7 +145,7 @@ export const EditChannelModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                        {t("modal.create_channel.channel_type_label")}
+                        {t('modal.create_channel.channel_type_label')}
                       </FormLabel>
                       <Select
                         defaultValue={field.value}
@@ -156,7 +156,7 @@ export const EditChannelModal = () => {
                           <SelectTrigger className="bg-zinc-300/50 border-0 focus:ring-0 text-black ring-offset-0 capitalize focus:ring-offset-0 outline-hidden">
                             <SelectValue
                               placeholder={t(
-                                "modal.create_channel.channel_type_placeholder"
+                                'modal.create_channel.channel_type_placeholder',
                               )}
                             />
                           </SelectTrigger>
@@ -174,7 +174,7 @@ export const EditChannelModal = () => {
                         </SelectContent>
                       </Select>
                       <FormDescription>
-                        {t("modal.create_channel.channel_type_description")}
+                        {t('modal.create_channel.channel_type_description')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -183,7 +183,7 @@ export const EditChannelModal = () => {
               </div>
               <DialogFooter className="bg-gray-100 px-6 py-4">
                 <Button variant="primary" disabled={isLoading}>
-                  {t("modal.edit_channel.button.save")}
+                  {t('modal.edit_channel.button.save')}
                 </Button>
               </DialogFooter>
             </form>
@@ -192,9 +192,9 @@ export const EditChannelModal = () => {
       </Dialog>
       <CustomPopup
         isOpen={isPopupOpen}
-        message={t("modal.edit_channel.success_message")}
+        message={t('modal.edit_channel.success_message')}
         onClose={() => setIsPopupOpen(false)}
       />
     </>
-  );
-};
+  )
+}

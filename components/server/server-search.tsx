@@ -1,4 +1,9 @@
-"use client";
+'use client'
+import { DialogTitle } from '@radix-ui/react-dialog'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { Search } from 'lucide-react'
+import { useParams, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import {
   CommandDialog,
   CommandEmpty,
@@ -6,58 +11,53 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { DialogTitle } from "@radix-ui/react-dialog";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
-import { Search } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useI18n } from "@/i18n/client";
+} from '@/components/ui/command'
+import { useI18n } from '@/i18n/client'
 
 interface ServerSearchProps {
   data: {
-    label: string;
-    type: "channel" | "member";
+    label: string
+    type: 'channel' | 'member'
     data:
       | {
-          icon: React.ReactNode;
-          name: string;
-          id: string;
+          icon: React.ReactNode
+          name: string
+          id: string
         }[]
-      | undefined;
-  }[];
+      | undefined
+  }[]
 }
 
 export const ServerSearch = ({ data }: ServerSearchProps) => {
-  const t = useI18n();
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
-  const params = useParams();
+  const t = useI18n()
+  const [open, setOpen] = useState(false)
+  const router = useRouter()
+  const params = useParams()
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key === "s") {
-        e.preventDefault();
-        setOpen((open) => !open);
+      if (e.ctrlKey && e.key === 's') {
+        e.preventDefault()
+        setOpen((open) => !open)
       }
-    };
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, []);
+    }
+    document.addEventListener('keydown', down)
+    return () => document.removeEventListener('keydown', down)
+  }, [])
   const onClick = ({
     id,
     type,
   }: {
-    id: string;
-    type: "channel" | "member";
+    id: string
+    type: 'channel' | 'member'
   }) => {
-    setOpen(false);
-    if (type === "member") {
-      router.push(`/servers/${params?.serverId}/conversations/${id}`);
+    setOpen(false)
+    if (type === 'member') {
+      router.push(`/servers/${params?.serverId}/conversations/${id}`)
     }
-    if (type === "channel") {
-      router.push(`/servers/${params?.serverId}/channels/${id}`);
+    if (type === 'channel') {
+      router.push(`/servers/${params?.serverId}/channels/${id}`)
     }
-  };
+  }
   return (
     <>
       <button
@@ -66,7 +66,7 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
       >
         <Search className="w-4 h-4 dark:text-zinc-400 text-zinc-500" />
         <p className="font-semibold text-sm text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition">
-          {t("server.search.search")}
+          {t('server.search.search')}
         </p>
         <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground ml-auto">
           <span className="text-xs">CTRL+S</span>
@@ -74,13 +74,13 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
       </button>
       <CommandDialog open={open} onOpenChange={setOpen}>
         <VisuallyHidden>
-          <DialogTitle>{t("server.search.title")}</DialogTitle>
+          <DialogTitle>{t('server.search.title')}</DialogTitle>
         </VisuallyHidden>
-        <CommandInput placeholder={t("server.search.placeholder")} />
+        <CommandInput placeholder={t('server.search.placeholder')} />
         <CommandList>
-          <CommandEmpty>{t("server.search.no_results")}</CommandEmpty>
+          <CommandEmpty>{t('server.search.no_results')}</CommandEmpty>
           {data.map(({ label, data, type }) => {
-            if (!data?.length) return null;
+            if (!data?.length) return null
             return (
               <CommandGroup key={label} heading={label}>
                 {data?.map(({ id, icon, name }) => {
@@ -92,13 +92,13 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
                       {icon}
                       <span>{name}</span>
                     </CommandItem>
-                  );
+                  )
                 })}
               </CommandGroup>
-            );
+            )
           })}
         </CommandList>
       </CommandDialog>
     </>
-  );
-};
+  )
+}

@@ -1,18 +1,23 @@
-"use client";
+'use client'
 
-import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { NavigationSidebar } from "@/components/navigation/navigation-sidebar";
-import { ServerSidebar } from "@/components/server/server-sidebar";
-import { useI18n } from "@/i18n/client";
+import { Menu } from 'lucide-react'
+import { NavigationSidebar } from '@/components/navigation/navigation-sidebar'
+import { ServerSidebar } from '@/components/server/server-sidebar'
+import { Button } from '@/components/ui/button'
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet'
+import { useI18n } from '@/i18n/client'
 
 interface MobileToggleProps {
-  serverId: string;
+  serverId: string
 }
 
 export const MobileToggle = ({ serverId }: MobileToggleProps) => {
-  const t = useI18n();
+  const t = useI18n()
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -25,10 +30,10 @@ export const MobileToggle = ({ serverId }: MobileToggleProps) => {
           <NavigationSidebar />
         </div>
         <SheetTitle>
-          <span className="sr-only">{t("mobile_toggle.title")}</span>
+          <span className="sr-only">{t('mobile_toggle.title')}</span>
         </SheetTitle>
         <ServerSidebar serverId={serverId} />
       </SheetContent>
     </Sheet>
-  );
-};
+  )
+}

@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack -p 2080",
     "build": "next build",
     "start": "next start",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "format": "biome format --write .",
+    "lint": "biome check ."
   },
   "dependencies": {
     "@clerk/nextjs": "^6.23.3",
@@ -63,14 +65,13 @@
     "zustand": "^5.0.6"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.5",
     "@tailwindcss/postcss": "^4.1.14",
     "@types/negotiator": "^0.6.4",
     "@types/node": "^22.13.8",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/uuid": "^10.0.0",
-    "eslint": "^9.34.0",
-    "eslint-config-next": "^15.3.3",
     "postcss": "^8.5.6",
     "prisma": "^6.14.0",
     "tailwindcss": "^4.1.14",

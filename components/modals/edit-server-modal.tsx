@@ -1,89 +1,91 @@
-"use client";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+'use client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import CustomPopup from '@/components/custom-popup'
+import { FileUpload } from '@/components/file-upload'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogFooter,
+  DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-
+} from '@/components/ui/dialog'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
-  FormDescription,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import axios from "axios";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import React, { useEffect, useState } from "react";
-import { FileUpload } from "@/components/file-upload";
-import { useRouter } from "next/navigation";
-import { useModal } from "@/hooks/use-modal-store";
-import CustomPopup from "@/components/custom-popup";
-import { useI18n } from "@/i18n/client";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { useModal } from '@/hooks/use-modal-store'
+import { useI18n } from '@/i18n/client'
 
 export const EditServerModal = () => {
-  const t = useI18n();
-  const { isOpen, onClose, type, data } = useModal();
-  const router = useRouter();
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const isModalOpen = isOpen && type === "editServer";
-  const { server } = data;
+  const t = useI18n()
+  const { isOpen, onClose, type, data } = useModal()
+  const router = useRouter()
+  const [isPopupOpen, setIsPopupOpen] = useState(false)
+  const isModalOpen = isOpen && type === 'editServer'
+  const { server } = data
 
   const formSchema = z.object({
     name: z.string().min(1, {
-      message: t("modal.create_server.error.name_required"),
+      message: t('modal.create_server.error.name_required'),
     }),
-    imageUrl: z.string().min(1, {
-      message: t("modal.create_server.error.image_required"),
-    }).nullable(),
-  });
+    imageUrl: z
+      .string()
+      .min(1, {
+        message: t('modal.create_server.error.image_required'),
+      })
+      .nullable(),
+  })
 
-type FormData = z.infer<typeof formSchema>;
+  type FormData = z.infer<typeof formSchema>
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      imageUrl: "",
+      name: '',
+      imageUrl: '',
     },
-  });
+  })
 
   useEffect(() => {
     if (server) {
-      form.setValue("name", server.name);
-      form.setValue("imageUrl", server.imageUrl);
+      form.setValue('name', server.name)
+      form.setValue('imageUrl', server.imageUrl)
     }
-  }, [server, form]);
+  }, [server, form])
 
-  const isLoading = form.formState.isSubmitting;
+  const isLoading = form.formState.isSubmitting
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (isLoading) return;
+    if (isLoading) return
     try {
-      await axios.patch(`/api/servers/${server?.id}`, values);
-      form.reset();
-      onClose();
-      router.refresh();
+      await axios.patch(`/api/servers/${server?.id}`, values)
+      form.reset()
+      onClose()
+      router.refresh()
       setTimeout(() => {
-        setIsPopupOpen(true);
-      }, 500);
+        setIsPopupOpen(true)
+      }, 500)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const handleClose = () => {
-    onClose();
-  };
+    onClose()
+  }
 
   return (
     <>
@@ -91,10 +93,10 @@ type FormData = z.infer<typeof formSchema>;
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              {t("modal.edit_server.title")}
+              {t('modal.edit_server.title')}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              {t("modal.edit_server.description")}
+              {t('modal.edit_server.description')}
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -109,7 +111,7 @@ type FormData = z.infer<typeof formSchema>;
                         <FormControl>
                           <FileUpload
                             endpoint="serverImage"
-                            value={field.value||""}
+                            value={field.value || ''}
                             onChange={field.onChange}
                           />
                         </FormControl>
@@ -124,20 +126,20 @@ type FormData = z.infer<typeof formSchema>;
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                        {t("modal.create_server.server_name_label")}
+                        {t('modal.create_server.server_name_label')}
                       </FormLabel>
                       <FormControl>
                         <Input
                           disabled={isLoading}
                           className="border-0 bg-zinc-300/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                           placeholder={t(
-                            "modal.create_server.server_name_placeholder"
+                            'modal.create_server.server_name_placeholder',
                           )}
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        {t("modal.create_server.server_name_description")}
+                        {t('modal.create_server.server_name_description')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -146,7 +148,7 @@ type FormData = z.infer<typeof formSchema>;
               </div>
               <DialogFooter className="bg-gray-100 px-6 py-4">
                 <Button variant="primary" disabled={isLoading}>
-                  {t("modal.edit_server.button.save")}
+                  {t('modal.edit_server.button.save')}
                 </Button>
               </DialogFooter>
             </form>
@@ -155,9 +157,9 @@ type FormData = z.infer<typeof formSchema>;
       </Dialog>
       <CustomPopup
         isOpen={isPopupOpen}
-        message={t("modal.edit_server.success_message")}
+        message={t('modal.edit_server.success_message')}
         onClose={() => setIsPopupOpen(false)}
       />
     </>
-  );
-};
+  )
+}

@@ -1,18 +1,19 @@
-"use client";
+'use client'
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
+import { Smile } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import {
   Popover,
-  PopoverTrigger,
   PopoverContent,
-} from "@/components/ui/popover";
-import Picker from "@emoji-mart/react";
-import data from "@emoji-mart/data";
-import { useTheme } from "next-themes";
-import { Smile } from "lucide-react";
+  PopoverTrigger,
+} from '@/components/ui/popover'
+
 interface EmojiPickerProps {
-  onChange: (value: string) => void;
+  onChange: (value: string) => void
 }
 export const EmojiPicker = ({ onChange }: EmojiPickerProps) => {
-  const { resolvedTheme } = useTheme();
+  const { resolvedTheme } = useTheme()
   return (
     <Popover>
       <PopoverTrigger>
@@ -27,10 +28,10 @@ export const EmojiPicker = ({ onChange }: EmojiPickerProps) => {
           theme={resolvedTheme}
           data={data}
           onEmojiSelect={(emoji: any) => {
-            onChange(emoji.native);
+            onChange(emoji.native)
           }}
         />
       </PopoverContent>
     </Popover>
-  );
-};
+  )
+}

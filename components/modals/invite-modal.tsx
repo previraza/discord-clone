@@ -1,65 +1,65 @@
-"use client";
+'use client'
+import axios from 'axios'
+import { Check, Copy, RefreshCw } from 'lucide-react'
+import React, { useState } from 'react'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import React, { useState } from "react";
-import { useModal } from "@/hooks/use-modal-store";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Check, Copy, RefreshCw } from "lucide-react";
-import { useOrigin } from "@/hooks/use-origin";
-import axios from "axios";
-import { useI18n } from "@/i18n/client";
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { useModal } from '@/hooks/use-modal-store'
+import { useOrigin } from '@/hooks/use-origin'
+import { useI18n } from '@/i18n/client'
 
 export const InviteModal = () => {
-  const t = useI18n();
-  const { onOpen, isOpen, onClose, type, data } = useModal();
-  const origin = useOrigin();
-  const isModalOpen = isOpen && type === "invite";
-  const { server } = data;
-  const [copied, setCopied] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const inviteUrl = `${origin}/invite/${server?.inviteCode}`;
+  const t = useI18n()
+  const { onOpen, isOpen, onClose, type, data } = useModal()
+  const origin = useOrigin()
+  const isModalOpen = isOpen && type === 'invite'
+  const { server } = data
+  const [copied, setCopied] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const inviteUrl = `${origin}/invite/${server?.inviteCode}`
   const onCopy = () => {
-    navigator.clipboard.writeText(inviteUrl);
-    setCopied(true);
+    navigator.clipboard.writeText(inviteUrl)
+    setCopied(true)
     setTimeout(() => {
-      setCopied(false);
-    }, 1500);
-  };
+      setCopied(false)
+    }, 1500)
+  }
   const onNew = async () => {
     try {
-      setIsLoading(true);
+      setIsLoading(true)
       const response = await axios.patch(
-        `/api/servers/${server?.id}/invite-code`
-      );
-      onOpen("invite", { server: response.data });
+        `/api/servers/${server?.id}/invite-code`,
+      )
+      onOpen('invite', { server: response.data })
     } catch (error) {
-      console.error(error);
+      console.error(error)
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
   return (
     <>
       <Dialog open={isModalOpen} onOpenChange={onClose}>
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              {t("modal.invite.title")}
+              {t('modal.invite.title')}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              {t("modal.invite.description")}
+              {t('modal.invite.description')}
             </DialogDescription>
           </DialogHeader>
           <div className="p-6">
             <Label className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-              {t("modal.invite.link_label")}
+              {t('modal.invite.link_label')}
             </Label>
             <div className="flex items-center mt-2 gap-x-2">
               <Input
@@ -83,12 +83,12 @@ export const InviteModal = () => {
               size="sm"
               className="text-zinc-500 mt-4 text-xs"
             >
-              {t("modal.invite.button.new_link")}
+              {t('modal.invite.button.new_link')}
               <RefreshCw className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </DialogContent>
       </Dialog>
     </>
-  );
-};
+  )
+}

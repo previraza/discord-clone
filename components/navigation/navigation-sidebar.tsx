@@ -1,20 +1,20 @@
-"use server";
+'use server'
 
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
-import { redirect } from "next/navigation";
-import { NavigationAction } from "@/components/navigation/navigation-action";
-import { ModeToggle } from "@/components/mode-toggle";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { Separator } from "@/components/ui/separator";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { NavigationItem } from "./navigation-item";
-import LocaleSwitcher from "@/i18n/components/locale-switcher";
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import { redirect } from 'next/navigation'
+import { ModeToggle } from '@/components/mode-toggle'
+import { NavigationAction } from '@/components/navigation/navigation-action'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { Separator } from '@/components/ui/separator'
+import LocaleSwitcher from '@/i18n/components/locale-switcher'
+import { currentProfile } from '@/lib/current-profile'
+import { db } from '@/lib/db'
+import { NavigationItem } from './navigation-item'
 
 export const NavigationSidebar = async () => {
-  const profile = await currentProfile();
+  const profile = await currentProfile()
   if (!profile) {
-    return redirect("/");
+    return redirect('/')
   }
 
   const servers = await db.server.findMany({
@@ -25,7 +25,7 @@ export const NavigationSidebar = async () => {
         },
       },
     },
-  });
+  })
 
   return (
     <div className="space-y-4 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] bg-[#E3E5E8] py-3">
@@ -52,12 +52,12 @@ export const NavigationSidebar = async () => {
           <UserButton
             appearance={{
               elements: {
-                avatarBox: "h-[45px] w-[45px]",
+                avatarBox: 'h-[45px] w-[45px]',
               },
             }}
           />
         </SignedIn>
       </div>
     </div>
-  );
-};
+  )
+}

@@ -1,6 +1,6 @@
-"use server";
+'use server'
 
-import { NavigationSidebar } from "@/components/navigation/navigation-sidebar";
+import { NavigationSidebar } from '@/components/navigation/navigation-sidebar'
 
 const MainLayout = async ({ children }: { children: React.ReactNode }) => {
   return (
@@ -12,7 +12,7 @@ const MainLayout = async ({ children }: { children: React.ReactNode }) => {
         <main className="h-full w-full pl-[72px]">{children}</main>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default MainLayout;
+export default MainLayout

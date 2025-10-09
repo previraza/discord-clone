@@ -1,31 +1,25 @@
-"use server";
+'use server'
 
-import { db } from "@/lib/db";
-import { Prisma, ServerAccessibility } from "@prisma/client";
+import type { Prisma, ServerAccessibility } from '@prisma/client'
+import { db } from '@/lib/db'
 
-type WithIncludedParameter = "archived" | "deleted";
+type WithIncludedParameter = 'archived' | 'deleted'
 
 type GetServersOptions = {
-  search?: string | null;
-  region?: string;
-  types?: string[];
-  states?: string[];
-  accessibility?: ServerAccessibility;
-  profileId?: string; // pour filtrer les serveurs créés par un profil donné
-  sort?:
-    | "newest"
-    | "oldest"
-    | "popular"
-    | "name_asc"
-    | "name_desc"
-    | "random";
-  cursor?: string | null;
-  limit?: number;
-  include?: WithIncludedParameter[];
-};
+  search?: string | null
+  region?: string
+  types?: string[]
+  states?: string[]
+  accessibility?: ServerAccessibility
+  profileId?: string // pour filtrer les serveurs créés par un profil donné
+  sort?: 'newest' | 'oldest' | 'popular' | 'name_asc' | 'name_desc' | 'random'
+  cursor?: string | null
+  limit?: number
+  include?: WithIncludedParameter[]
+}
 
-function makeRule<T extends Prisma.ServerWhereInput>(cond: unknown, rule:T) {
-  return cond ? rule : {};
+function makeRule<T extends Prisma.ServerWhereInput>(cond: unknown, rule: T) {
+  return cond ? rule : {}
 }
 
 export async function getServerData(params: GetServersOptions) {
@@ -37,45 +31,47 @@ export async function getServerData(params: GetServersOptions) {
     accessibility,
     include = [],
     profileId,
-    sort = "newest",
+    sort = 'newest',
     cursor,
     limit = 24,
-  } = params;
+  } = params
 
   const orderBy: Prisma.ServerOrderByWithRelationInput =
-    sort === "newest"
-      ? { createdAt: "desc" }
-      : sort === "oldest"
-      ? { createdAt: "asc" }
-      : sort === "popular"
-      ? { members: { _count: "desc" } }
-      : sort === "name_asc"
-      ? { name: "asc" }
-      : sort === "name_desc"
-      ? { name: "desc" }
-      : sort === "random"
-      ? { id: "asc" } // Prisma ne supporte pas RAND() → géré côté client
-      : { createdAt: "desc" };
+    sort === 'newest'
+      ? { createdAt: 'desc' }
+      : sort === 'oldest'
+        ? { createdAt: 'asc' }
+        : sort === 'popular'
+          ? { members: { _count: 'desc' } }
+          : sort === 'name_asc'
+            ? { name: 'asc' }
+            : sort === 'name_desc'
+              ? { name: 'desc' }
+              : sort === 'random'
+                ? { id: 'asc' } // Prisma ne supporte pas RAND() → géré côté client
+                : { createdAt: 'desc' }
 
   const where = {
     AND: [
       makeRule(search, {
         OR: [
-        { name: { contains: search||"", mode: "insensitive" } },
-        { description: { contains: search||"", mode: "insensitive" } },
-        { region: { contains: search||"", mode: "insensitive" } },
-        { type: { name: { contains: search||"", mode: "insensitive" } } },
+          { name: { contains: search || '', mode: 'insensitive' } },
+          { description: { contains: search || '', mode: 'insensitive' } },
+          { region: { contains: search || '', mode: 'insensitive' } },
+          { type: { name: { contains: search || '', mode: 'insensitive' } } },
         ],
       }),
       makeRule(region, { region }),
       makeRule(types?.length, { typeId: { in: types } }),
-      makeRule(states?.length, { channels: { some: { state: { in: states } } } }),
+      makeRule(states?.length, {
+        channels: { some: { state: { in: states } } },
+      }),
       makeRule(accessibility, { accessibility }),
       makeRule(profileId, { profileId }),
       makeRule(include.includes('archived'), { isArchived: false }),
-      makeRule(include.includes('deleted'), { deletedAt: null }) 
-    ]
-  };
+      makeRule(include.includes('deleted'), { deletedAt: null }),
+    ],
+  }
 
   const servers = await db.server.findMany({
     where,
@@ -99,18 +95,18 @@ export async function getServerData(params: GetServersOptions) {
           members: true,
         },
       },
-    }
-  });
+    },
+  })
 
-  const hasNextPage = servers.length > limit;
-  const nextCursor = hasNextPage ? servers[limit].id : null;
+  const hasNextPage = servers.length > limit
+  const nextCursor = hasNextPage ? servers[limit].id : null
 
   return {
     servers: servers.slice(0, limit),
     nextCursor,
     hasNextPage,
-    params
-  };
+    params,
+  }
 }
 
-export type GetServerDataResponse = Awaited<ReturnType<typeof getServerData>>;
+export type GetServerDataResponse = Awaited<ReturnType<typeof getServerData>>

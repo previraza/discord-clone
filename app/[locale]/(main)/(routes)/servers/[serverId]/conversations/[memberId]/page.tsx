@@ -1,34 +1,34 @@
-import ChatHeader from "@/components/chat/chat-header";
-import { ChatInput } from "@/components/chat/chat-input";
-import { ChatMessages } from "@/components/chat/chat-messages";
-import { MediaRoom } from "@/components/media-room";
-import { getOrCreateConversation } from "@/lib/conversation";
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
+import { auth } from '@clerk/nextjs/server'
+import { redirect } from 'next/navigation'
+import ChatHeader from '@/components/chat/chat-header'
+import { ChatInput } from '@/components/chat/chat-input'
+import { ChatMessages } from '@/components/chat/chat-messages'
+import { MediaRoom } from '@/components/media-room'
+import { getOrCreateConversation } from '@/lib/conversation'
+import { currentProfile } from '@/lib/current-profile'
+import { db } from '@/lib/db'
 
 type Params = Promise<{
-  memberId: string;
-  serverId: string;
-}>;
+  memberId: string
+  serverId: string
+}>
 
 type SearchParams = Promise<{
-  video?: boolean;
-}>;
+  video?: boolean
+}>
 
 interface MemberIdPageProps {
-  params: Params;
-  searchParams: SearchParams;
+  params: Params
+  searchParams: SearchParams
 }
 
 const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
-  const { memberId, serverId } = await params;
-  const { video } = await searchParams;
-  const profile = await currentProfile();
+  const { memberId, serverId } = await params
+  const { video } = await searchParams
+  const profile = await currentProfile()
   if (!profile) {
-    const authInstance = await auth();
-    return authInstance.redirectToSignIn();
+    const authInstance = await auth()
+    return authInstance.redirectToSignIn()
   }
   const currentMember = await db.member.findFirst({
     where: {
@@ -38,20 +38,16 @@ const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
     include: {
       profile: true,
     },
-  });
+  })
   if (!currentMember) {
-    return redirect("/");
+    return redirect('/')
   }
-  const conversation = await getOrCreateConversation(
-    currentMember.id,
-    memberId
-  );
+  const conversation = await getOrCreateConversation(currentMember.id, memberId)
   if (!conversation) {
-    return redirect(`/servers/${serverId}`);
+    return redirect(`/servers/${serverId}`)
   }
-  const { memberOne, memberTwo } = conversation;
-  const otherMember =
-    memberOne.profileId === profile.id ? memberTwo : memberOne;
+  const { memberOne, memberTwo } = conversation
+  const otherMember = memberOne.profileId === profile.id ? memberTwo : memberOne
   return (
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
       <ChatHeader
@@ -89,6 +85,6 @@ const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
         </>
       )}
     </div>
-  );
-};
-export default MemberIdPage;
+  )
+}
+export default MemberIdPage

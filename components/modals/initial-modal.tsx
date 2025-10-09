@@ -1,74 +1,72 @@
-"use client";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+'use client'
+import { zodResolver } from '@hookform/resolvers/zod'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
+import React, { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import * as z from 'zod'
+import { FileUpload } from '@/components/file-upload'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogHeader,
   DialogFooter,
+  DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-
+} from '@/components/ui/dialog'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
-  FormDescription,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import axios from "axios";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import React from "react";
-import { useState, useEffect } from "react";
-import { FileUpload } from "@/components/file-upload";
-import { useRouter } from "next/navigation";
-import { useI18n } from "@/i18n/client";
+} from '@/components/ui/form'
+import { Input } from '@/components/ui/input'
+import { useI18n } from '@/i18n/client'
 
 export const InitialModal = () => {
-  const t = useI18n();
-  const [isMounted, setIsMounted] = useState(false);
-  const router = useRouter();
+  const t = useI18n()
+  const [isMounted, setIsMounted] = useState(false)
+  const router = useRouter()
 
   const formSchema = z.object({
     name: z.string().min(1, {
-      message: t("modal.initial.error.name_required"),
+      message: t('modal.initial.error.name_required'),
     }),
     imageUrl: z.string().min(1, {
-      message: t("modal.initial.error.image_required"),
+      message: t('modal.initial.error.image_required'),
     }),
-  });
+  })
 
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    setIsMounted(true)
+  }, [])
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      imageUrl: "",
+      name: '',
+      imageUrl: '',
     },
-  });
+  })
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      await axios.post("/api/servers", values);
-      form.reset();
-      router.refresh();
-      window.location.reload();
+      await axios.post('/api/servers', values)
+      form.reset()
+      router.refresh()
+      window.location.reload()
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
-  const isLoading = form.formState.isSubmitting;
+  const isLoading = form.formState.isSubmitting
 
   if (!isMounted) {
-    return null;
+    return null
   }
 
   return (
@@ -77,10 +75,10 @@ export const InitialModal = () => {
         <DialogContent className="bg-white text-black p-0 overflow-hidden">
           <DialogHeader className="pt-8 px-6">
             <DialogTitle className="text-4xl text-center font-bold mb-3">
-              {t("modal.initial.title")}
+              {t('modal.initial.title')}
             </DialogTitle>
             <DialogDescription className="text-center text-zinc-500">
-              {t("modal.initial.description")}
+              {t('modal.initial.description')}
             </DialogDescription>
           </DialogHeader>
           <Form {...form}>
@@ -110,20 +108,20 @@ export const InitialModal = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
-                        {t("modal.initial.server_name_label")}
+                        {t('modal.initial.server_name_label')}
                       </FormLabel>
                       <FormControl>
                         <Input
                           disabled={isLoading}
                           className="border-0 bg-zinc-300/50 focus-visible:ring-0 text-black focus-visible:ring-offset-0"
                           placeholder={t(
-                            "modal.initial.server_name_placeholder"
+                            'modal.initial.server_name_placeholder',
                           )}
                           {...field}
                         />
                       </FormControl>
                       <FormDescription>
-                        {t("modal.initial.server_name_description")}
+                        {t('modal.initial.server_name_description')}
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
@@ -132,7 +130,7 @@ export const InitialModal = () => {
               </div>
               <DialogFooter className="bg-gray-100 px-6 py-4">
                 <Button variant="primary" disabled={isLoading}>
-                  {t("modal.initial.button.create")}
+                  {t('modal.initial.button.create')}
                 </Button>
               </DialogFooter>
             </form>
@@ -140,5 +138,5 @@ export const InitialModal = () => {
         </DialogContent>
       </Dialog>
     </>
-  );
-};
+  )
+}

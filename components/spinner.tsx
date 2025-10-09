@@ -1,16 +1,18 @@
-import { motion } from "framer-motion";
-import React from "react";
-import { ThreeDots } from "react-loader-spinner";
+import { motion } from 'framer-motion'
+import { ThreeDots } from 'react-loader-spinner'
+import { cn } from '@/lib/utils'
 
-type Props = {};
+type Props = {
+  className?: string
+}
 
-export default function Spinner({}: Props) {
+export default function Spinner({ className }: Props) {
   return (
     <motion.div
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      className="flex justify-center items-center"
+      className={cn('flex justify-center items-center', className)}
     >
       <ThreeDots
         height="180"
@@ -22,5 +24,5 @@ export default function Spinner({}: Props) {
         visible={true}
       />
     </motion.div>
-  );
+  )
 }

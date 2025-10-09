@@ -1,15 +1,17 @@
-import LoadingRedirect from "@/components/loading-redirect";
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
-import { auth } from "@clerk/nextjs/server";
-import { JoinServer } from "./components/join-server";
+import { auth } from '@clerk/nextjs/server'
+import LoadingRedirect from '@/components/loading-redirect'
+import { currentProfile } from '@/lib/current-profile'
+import { db } from '@/lib/db'
+import { JoinServer } from './components/join-server'
 
-export default async function ServerIdPage ({ params }: PageProps<"/[locale]/servers/[serverId]">) {
-  const { serverId } = await params;
-  const profile = await currentProfile();
+export default async function ServerIdPage({
+  params,
+}: PageProps<'/[locale]/servers/[serverId]'>) {
+  const { serverId } = await params
+  const profile = await currentProfile()
   if (!profile) {
-    const authInstance = await auth();
-    return authInstance.redirectToSignIn();
+    const authInstance = await auth()
+    return authInstance.redirectToSignIn()
   }
   const server = await db.server.findUnique({
     where: {
@@ -23,30 +25,25 @@ export default async function ServerIdPage ({ params }: PageProps<"/[locale]/ser
     include: {
       channels: {
         where: {
-          name: "general",
+          name: 'general',
         },
         orderBy: {
-          createdAt: "asc",
+          createdAt: 'asc',
         },
       },
     },
-  });
-  const initialChannel = server?.channels[0];
+  })
+  const initialChannel = server?.channels[0]
 
-  if (initialChannel?.name !== "general") {
-    return (
-      <JoinServer
-        serverId={serverId}
-        serverName={server?.name}
-      />
-    );
+  if (initialChannel?.name !== 'general') {
+    return <JoinServer serverId={serverId} serverName={server?.name} />
   }
 
   return (
     <LoadingRedirect
       serverId={serverId}
       initialChannelId={initialChannel?.id}
-      shouldRedirect={initialChannel?.name === "general"}
+      shouldRedirect={initialChannel?.name === 'general'}
     />
-  );
-};
+  )
+}
