@@ -1,5 +1,6 @@
 "use server";
 
+import { getI18n } from "@/i18n/server";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
@@ -10,12 +11,13 @@ type JoinServerActionResult = {
 };
 
 export async function joinServerAction(serverId: string):Promise<JoinServerActionResult> {
+    const t = await getI18n();
     const profile = await currentProfile();
   
     if (!profile) {
       const authInstance = await auth();
       authInstance.redirectToSignIn();
-      return { status: "error", "message": "Vous devez être connecté pour rejoindre cette espace"};
+      return { status: "error", "message": t("join_server.action.error.not_logged_in")};
     }
   
     const allReadyMember = await db.server.findFirst({
@@ -30,7 +32,7 @@ export async function joinServerAction(serverId: string):Promise<JoinServerActio
     });
   
     if (allReadyMember) {
-      return { status: "success", "message": "Vous êtes déjà membre de cette espace"};
+      return { status: "success", "message": t("join_server.action.success.already_member")};
     }
 
     const serverExists = await db.server.findUnique({
@@ -38,15 +40,15 @@ export async function joinServerAction(serverId: string):Promise<JoinServerActio
     });
 
     if(!serverExists) {
-      return { status: "error", "message": "Cette espace n'existe pas"};
+      return { status: "error", "message": t("join_server.action.error.not_found")};
     }
 
     if(serverExists.accessibility === "PRIVATE") {
-      return { status: "error", "message": "Cette espace est privée"};
+      return { status: "error", "message": t("join_server.action.error.private")};
     }
 
     if(serverExists.accessibility === "PROTECTED") {
-      return { status: "error", "message": "Cette espace est protégée"};
+      return { status: "error", "message": t("join_server.action.error.protected")};
     }
   
     const server = await db.server.update({
@@ -61,8 +63,8 @@ export async function joinServerAction(serverId: string):Promise<JoinServerActio
     });
   
     if (server) {
-      return { status: "success", "message": "Vous avez rejoint cette espace"};
+      return { status: "success", "message": t("join_server.action.success.joined")};
     }
 
-    return { status: "error", "message": "Une erreur est survenue lors de l'ajout de membre"};
+    return { status: "error", "message": t("join_server.action.error.generic")};
 }

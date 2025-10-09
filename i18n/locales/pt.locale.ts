@@ -98,6 +98,7 @@ export default {
   "server.header.create_channel": "Criar canal",
   "server.header.delete_server": "Excluir Kyaghanda",
   "server.header.leave_server": "Sair do Kyaghanda",
+  "server.header.become_member": "Tornar-se membro",
 
   "server.search.search": "Pesquisar",
   "server.search.title": "Pesquisar canais e membros",
@@ -148,6 +149,50 @@ export default {
 
   "chat.video_button.start": "Iniciar chamada de vídeo",
   "chat.video_button.end": "Encerrar chamada de vídeo",
+
+  "server.section.create_channel": "Criar canal",
+  "server.section.manage_members": "Gerenciar membros",
+
+  "server.channel.edit": "Editar",
+  "server.channel.delete": "Excluir",
+
+  "join_server.error": "Ocorreu um erro ao entrar.",
+  "join_server.success_title": "🎉 Você entrou em {serverName}!",
+  "join_server.success_description": "Você será redirecionado para este espaço em breve.",
+  "join_server.title": "Você ainda não é um membro",
+  "join_server.description": "Junte-se a {serverName} para acessar seus recursos.",
+  "join_server.button.loading": "Carregando...",
+  "join_server.button.join": "Entrar no espaço",
+  "join_server.action.error.not_logged_in": "Você precisa estar logado para entrar neste espaço",
+  "join_server.action.success.already_member": "Você já é membro deste espaço",
+  "join_server.action.error.not_found": "Este espaço não existe",
+  "join_server.action.error.private": "Este espaço é privado",
+  "join_server.action.error.protected": "Este espaço é protegido",
+  "join_server.action.success.joined": "Você entrou neste espaço",
+  "join_server.action.error.generic": "Ocorreu um erro ao adicionar o membro",
+
+  "explore.hero.title": "Encontre sua comunidade no Discord",
+  "explore.hero.subtitle": "De jogos a música e estudos, há um lugar para você.",
+  "explore.hero.search_placeholder": "Explorar servidores",
+
+  "explore.categories.types.kyaghanda": "Kyaghanda",
+  "explore.categories.types.vyaghanda": "Vyaghanda",
+  "explore.categories.types.vyaswa": "Vyaswa",
+  "explore.categories.types.biharo": "Biharo",
+  "explore.categories.states.audio_conference": "Audioconferência",
+  "explore.categories.states.visio_conference": "Visioconferência",
+
+  "explore.card.banner_alt": "Banner",
+  "explore.card.avatar_alt": "Avatar",
+  "explore.card.online": "Online",
+  "explore.card.members": "Membros",
+
+  "explore.card_grid.no_results.title": "Nenhum resultado",
+  "explore.card_grid.no_results.subtitle": "Não encontramos nenhum servidor que corresponda à sua pesquisa.",
+  "explore.card_grid.featured.title": "Servidores em destaque",
+  "explore.card_grid.featured.subtitle": "Alguns Discords incríveis que achamos que você vai adorar",
+
+  "mobile_toggle.title": "Menu do servidor"
 } as const;
 
 export const setting = {

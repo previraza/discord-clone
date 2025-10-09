@@ -7,6 +7,7 @@ import { Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { joinServerAction } from "./join-server.actions";
 import { useRouter } from "next/navigation";
+import { useI18n } from "@/i18n/client";
 
 interface JoinServerProps {
   serverId: string;
@@ -17,6 +18,7 @@ export function JoinServer({
   serverId,
   serverName,
 }: JoinServerProps) {
+  const t = useI18n();
   const [isPending, startTransition] = useTransition();
   const [joined, setJoined] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -35,7 +37,7 @@ export function JoinServer({
         } else if(result.message) setError(result.message);
       } catch (err) {
         console.error(err);
-        setError("Une erreur est survenue lors de l'affiliation.");
+        setError(t("join_server.error"));
       }
     })
   };
@@ -49,10 +51,10 @@ export function JoinServer({
           className="flex flex-col items-center justify-center py-20 text-center space-y-2"
         >
           <h2 className="text-2xl font-semibold text-green-600">
-            🎉 Vous avez rejoint {serverName || "l’organisation"} !
+            {t("join_server.success_title", { serverName: serverName || "the organization" })}
           </h2>
           <p className="text-sm text-gray-100 font-semibold">
-            Vous allez être redirigé vers cette espace dans un instant.
+            {t("join_server.success_description")}
           </p>
         </motion.div>
       </div>
@@ -64,16 +66,12 @@ export function JoinServer({
         <Card className="mx-auto max-w-2xl mt-10 shadow-lg bg-card/40 px-6 py-10">
             <CardHeader>
                 <CardTitle className="text-center">
-                Vous n'êtes pas encore membre
+                {t("join_server.title")}
                 </CardTitle>
             </CardHeader>
             <CardContent className="text-center space-y-4">
                 <p className="text-muted-foreground">
-                Rejoignez{" "}
-                <span className="font-semibold text-foreground">
-                    {serverName || "cette espace"}
-                </span>{" "}
-                pour accéder à ses fonctionnalités.
+                {t("join_server.description", { serverName: serverName || "this space" })}
                 </p>
 
                 {error && (
@@ -88,10 +86,10 @@ export function JoinServer({
                 {isPending ? (
                     <>
                     <Loader2 className="animate-spin mr-2 h-4 w-4" />
-                    En cours...
+                    {t("join_server.button.loading")}
                     </>
                 ) : (
-                    "Rejoindre l'espace"
+                    t("join_server.button.join")
                 )}
                 </Button>
             </CardContent>

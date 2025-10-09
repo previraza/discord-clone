@@ -98,6 +98,7 @@ export default {
   "server.header.create_channel": "Unda chaneli",
   "server.header.delete_server": "Futa Kyaghanda",
   "server.header.leave_server": "Ondoka Kyaghanda",
+  "server.header.become_member": "Kuwa mwanachama",
 
   "server.search.search": "Tafuta",
   "server.search.title": "Tafuta chaneli na wanachama",
@@ -148,6 +149,50 @@ export default {
 
   "chat.video_button.start": "Anza simu ya video",
   "chat.video_button.end": "Maliza simu ya video",
+
+  "server.section.create_channel": "Unda chaneli",
+  "server.section.manage_members": "Dhibiti wanachama",
+
+  "server.channel.edit": "Hariri",
+  "server.channel.delete": "Futa",
+
+  "join_server.error": "Kuna hitilafu imetokea wakati wa kujiunga.",
+  "join_server.success_title": "🎉 Umejiunga na {serverName}!",
+  "join_server.success_description": "Utaelekezwa kwenye nafasi hii baada ya muda mfupi.",
+  "join_server.title": "Bado wewe si mwanachama",
+  "join_server.description": "Jiunge na {serverName} ili kupata vipengele vyake.",
+  "join_server.button.loading": "Inapakia...",
+  "join_server.button.join": "Jiunge na nafasi",
+  "join_server.action.error.not_logged_in": "Lazima uingie ili ujiunge na nafasi hii",
+  "join_server.action.success.already_member": "Tayari wewe ni mwanachama wa nafasi hii",
+  "join_server.action.error.not_found": "Nafasi hii haipo",
+  "join_server.action.error.private": "Nafasi hii ni ya faragha",
+  "join_server.action.error.protected": "Nafasi hii inalindwa",
+  "join_server.action.success.joined": "Umejiunga na nafasi hii",
+  "join_server.action.error.generic": "Kuna hitilafu imetokea wakati wa kuongeza mwanachama",
+
+  "explore.hero.title": "Pata jumuiya yako kwenye Discord",
+  "explore.hero.subtitle": "Kutoka michezo, muziki, hadi masomo, kuna nafasi kwa ajili yako.",
+  "explore.hero.search_placeholder": "Gundua seva",
+
+  "explore.categories.types.kyaghanda": "Kyaghanda",
+  "explore.categories.types.vyaghanda": "Vyaghanda",
+  "explore.categories.types.vyaswa": "Vyaswa",
+  "explore.categories.types.biharo": "Biharo",
+  "explore.categories.states.audio_conference": "Mkutano wa sauti",
+  "explore.categories.states.visio_conference": "Mkutano wa video",
+
+  "explore.card.banner_alt": "Bango",
+  "explore.card.avatar_alt": "Ishara",
+  "explore.card.online": "Mtandaoni",
+  "explore.card.members": "Wanachama",
+
+  "explore.card_grid.no_results.title": "Hakuna matokeo",
+  "explore.card_grid.no_results.subtitle": "Hatukuweza kupata seva zozote zinazolingana na utafutaji wako.",
+  "explore.card_grid.featured.title": "Seva zilizoangaziwa",
+  "explore.card_grid.featured.subtitle": "Baadhi ya seva za Discord nzuri tunazofikiri utazipenda",
+
+  "mobile_toggle.title": "Menyu ya seva"
 } as const;
 
 export const setting = {

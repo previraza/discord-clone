@@ -7,10 +7,12 @@ import Spinner from "../../../../../../../components/spinner";
 import { useDebounce } from "@/hooks/use-debounce";
 import { useQueryState } from "nuqs";
 import { type GetServerDataResponse, getServerData } from "./server-actions";
+import { useI18n } from "@/i18n/client";
 
 type FilterQuery = Record<string, string[]>
 
 export function CardGrid () {
+    const t = useI18n();
     const [ searchQuery ] = useQueryState("q");
     const [ _filterQuery ] = useQueryState("filter");
     const filterQuery = _filterQuery as unknown as FilterQuery;
@@ -60,17 +62,17 @@ export function CardGrid () {
         <Spinner />
       ) : servers.length === 0 ? (
         <div className="pb-4">
-          <p className="font-bold text-[20px]">No Results</p>
+          <p className="font-bold text-[20px]">{t("explore.card_grid.no_results.title")}</p>
           <p className="font-semibold text-muted-foreground">
-            {`We couldn't find any servers matching your search.`}
+            {t("explore.card_grid.no_results.subtitle")}
           </p>
         </div>
       ) : (
         <>
           <div className="pb-4">
-            <p className="font-bold text-[20px]">Featured Servers</p>
+            <p className="font-bold text-[20px]">{t("explore.card_grid.featured.title")}</p>
             <p className="font-semibold text-muted-foreground">
-                {`Some awesome Discords we think you'd love`}
+                {t("explore.card_grid.featured.subtitle")}
             </p>
           </div>
           <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-y-8 xs:gap-x-2 sm:gap-x-4 mb-4">

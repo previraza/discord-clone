@@ -21,26 +21,26 @@ export default async function ServerIdLayout ({ children }: LayoutProps<"/[local
           types: [
             {
               id: "kyaghanda",
-              label: "Kyaghanda",
+              label: t("explore.categories.types.kyaghanda"),
             },{
               id: "vyaghanda",
-              label: "vyaghanda",
+              label: t("explore.categories.types.vyaghanda"),
             }, {
               id: "vyaswa",
-              label: "vyaswa",
+              label: t("explore.categories.types.vyaswa"),
             }, {
               id: "biharo",
-              label: "biharo",
+              label: t("explore.categories.types.biharo"),
             }
           ], states: [
             {
               id: "live-audio",
-              label: "Audio Conference",
+              label: t("explore.categories.states.audio_conference"),
               icon: "AUDIO",
             },
             {
               id: "live-video",
-              label: "Visio Conference",
+              label: t("explore.categories.states.visio_conference"),
               icon: "VIDEO",
             }
           ]

@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { ModalType, useModal } from "@/hooks/use-modal-store";
+import { useI18n } from "@/i18n/client";
 
 interface ServerChannelProps {
   channel: Channel;
@@ -26,6 +27,7 @@ export const ServerChannel = ({
   const { onOpen } = useModal();
   const params = useParams();
   const router = useRouter();
+  const t = useI18n();
   const Icon = iconMap[channel.type];
   const onClick = () => {
     router.push(`/servers/${params?.serverId}/channels/${channel.id}`);
@@ -54,13 +56,13 @@ export const ServerChannel = ({
       </p>
       {channel.name !== "general" && role !== MemberRole.GUEST && (
         <div className="ml-auto flex items-center gap-x-2">
-          <ActionTooltip label="Edit">
+          <ActionTooltip label={t("server.channel.edit")}>
             <Edit
               onClick={(e) => onAction(e, "editChannel")}
               className="hidden group-hover:block w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"
             />
           </ActionTooltip>
-          <ActionTooltip label="Delete">
+          <ActionTooltip label={t("server.channel.delete")}>
             <Trash
               onClick={(e) => onAction(e, "deleteChannel")}
               className="hidden group-hover:block w-4 h-4 text-zinc-500 hover:text-zinc-600 dark:text-zinc-400 dark:hover:text-zinc-300 transition"

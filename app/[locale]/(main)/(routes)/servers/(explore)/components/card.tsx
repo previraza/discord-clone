@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useI18n } from "@/i18n/client";
 
 type CardProps = {
   serverName: string;
@@ -23,6 +24,7 @@ export function Card ({
   memberCount,
   id,
 }: CardProps ) {
+  const t = useI18n();
   return (
     <motion.div
       whileTap={{ scale: 0.9 }}
@@ -34,7 +36,7 @@ export function Card ({
       <Link href={`/servers/${id}`}>
         <div className="h-40 flex w-full cursor-pointer">
           {bannerImage && <Image
-              alt="banner"
+              alt={t("explore.card.banner_alt")}
               src={bannerImage}
               width={900}
               height={600}
@@ -45,7 +47,7 @@ export function Card ({
           <div className="absolute -top-8  left-4 w-16 h-16 flex rounded-2xl p-1 bg-muted">
             {avatarImage ? (
               <Image
-                alt="avatar"
+                alt={t("explore.card.avatar_alt")}
                 src={avatarImage}
                 width={512}
                 height={512}
@@ -72,8 +74,8 @@ export function Card ({
           ))}
 
           <p className=" text-gray-400 font-medium text-[13.5px] pt-3 pb-4 ">
-            {onlineCount} Online &#x2022;{" "}
-            {memberCount} Members
+            {onlineCount} {t("explore.card.online")} &#x2022;{" "}
+            {memberCount} {t("explore.card.members")}
           </p>
         </div>
       </Link>

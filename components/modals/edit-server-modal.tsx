@@ -44,10 +44,12 @@ export const EditServerModal = () => {
     }),
     imageUrl: z.string().min(1, {
       message: t("modal.create_server.error.image_required"),
-    }),
+    }).nullable(),
   });
 
-  const form = useForm({
+type FormData = z.infer<typeof formSchema>;
+
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -107,7 +109,7 @@ export const EditServerModal = () => {
                         <FormControl>
                           <FileUpload
                             endpoint="serverImage"
-                            value={field.value}
+                            value={field.value||""}
                             onChange={field.onChange}
                           />
                         </FormControl>

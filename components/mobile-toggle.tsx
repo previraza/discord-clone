@@ -1,15 +1,18 @@
-import { Menu } from "lucide-react";
-import {
-  Sheet,
-  SheetContent,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
-import { ServerSidebar } from "@/components/server/server-sidebar";
-import VisuallyHidden from "@/components/visually-hidden";
+"use client";
 
-export const MobileToggle = ({ serverId }: { serverId: string }) => {
+import { Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { NavigationSidebar } from "@/components/navigation/navigation-sidebar";
+import { ServerSidebar } from "@/components/server/server-sidebar";
+import { useI18n } from "@/i18n/client";
+
+interface MobileToggleProps {
+  serverId: string;
+}
+
+export const MobileToggle = ({ serverId }: MobileToggleProps) => {
+  const t = useI18n();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -17,10 +20,13 @@ export const MobileToggle = ({ serverId }: { serverId: string }) => {
           <Menu />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="p-0 flex gap-0">
-        <VisuallyHidden>
-          <SheetTitle>Server Menu</SheetTitle>
-        </VisuallyHidden>
+      <SheetContent side="left" className="p-0 flex gap-0 w-[312px]">
+        <div className="w-[72px]">
+          <NavigationSidebar />
+        </div>
+        <SheetTitle>
+          <span className="sr-only">{t("mobile_toggle.title")}</span>
+        </SheetTitle>
         <ServerSidebar serverId={serverId} />
       </SheetContent>
     </Sheet>

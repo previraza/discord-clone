@@ -149,6 +149,50 @@ export default {
 
   "chat.video_button.start": "Start Video Call",
   "chat.video_button.end": "End Video Call",
+
+  "server.section.create_channel": "Create Channel",
+  "server.section.manage_members": "Manage Members",
+
+  "server.channel.edit": "Edit",
+  "server.channel.delete": "Delete",
+
+  "join_server.error": "An error occurred while joining.",
+  "join_server.success_title": "🎉 You have joined {serverName}!",
+  "join_server.success_description": "You will be redirected to this space in a moment.",
+  "join_server.title": "You are not a member yet",
+  "join_server.description": "Join {serverName} to access its features.",
+  "join_server.button.loading": "Loading...",
+  "join_server.button.join": "Join Space",
+  "join_server.action.error.not_logged_in": "You must be logged in to join this space",
+  "join_server.action.success.already_member": "You are already a member of this space",
+  "join_server.action.error.not_found": "This space does not exist",
+  "join_server.action.error.private": "This space is private",
+  "join_server.action.error.protected": "This space is protected",
+  "join_server.action.success.joined": "You have joined this space",
+  "join_server.action.error.generic": "An error occurred while adding the member",
+
+  "explore.hero.title": "Find your community on Discord",
+  "explore.hero.subtitle": "From gaming, to music, to study, there's a place for you.",
+  "explore.hero.search_placeholder": "Explore servers",
+
+  "explore.categories.types.kyaghanda": "Kyaghanda",
+  "explore.categories.types.vyaghanda": "Vyaghanda",
+  "explore.categories.types.vyaswa": "Vyaswa",
+  "explore.categories.types.biharo": "Biharo",
+  "explore.categories.states.audio_conference": "Audio Conference",
+  "explore.categories.states.visio_conference": "Visio Conference",
+
+  "explore.card.banner_alt": "Banner",
+  "explore.card.avatar_alt": "Avatar",
+  "explore.card.online": "Online",
+  "explore.card.members": "Members",
+
+  "explore.card_grid.no_results.title": "No Results",
+  "explore.card_grid.no_results.subtitle": "We couldn't find any servers matching your search.",
+  "explore.card_grid.featured.title": "Featured Servers",
+  "explore.card_grid.featured.subtitle": "Some awesome Discords we think you'd love",
+
+  "mobile_toggle.title": "Server Menu"
 } as const;
 
 export const setting = {
