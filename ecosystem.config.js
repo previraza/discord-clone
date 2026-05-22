@@ -2,16 +2,12 @@ module.exports = {
   apps: [
     {
       name: 'Mcisme - Echo',
-      script: 'start',
+      script: 'npm run start',
       watch: '.next/build',
       env: {
         NODE_ENV: 'production',
         PORT: 2080,
       },
-    },
-    {
-      script: './sw/',
-      watch: ['./sw'],
     },
   ],
 
